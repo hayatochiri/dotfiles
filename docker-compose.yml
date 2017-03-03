@@ -1,0 +1,3 @@
+emulate:
+  build: .
+  command: /usr/bin/fish
