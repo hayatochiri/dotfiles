@@ -1,0 +1,5 @@
+/home/.local
+/home/.config/fish/*
+!/home/.config/fish/config.fish
+!/home/.config/fish/conf.d
+!/home/.config/fish/conf.d/*
