@@ -25,7 +25,8 @@ ENV TEMPORARY_PACKAGES unzip \
 
 ENV INSTALL_PACKAGES wget \
   libcurl4-openssl-dev \
-  ca-certificates
+  ca-certificates \
+  less
 
 RUN apt-get update && \
   apt-get -y install $TEMPORARY_PACKAGES $INSTALL_PACKAGES
