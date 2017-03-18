@@ -55,8 +55,9 @@ RUN cd /tmp && \
   apt-get -y install fish
 
 # Install fzf
-RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-  yes 'y' | ~/.fzf/install
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git /usr/lib/.fzf && \
+  yes 'y' | /usr/lib/.fzf/install && \
+  ln -s /usr/lib/.fzf/bin/fzf /usr/bin/fzf
 
 # Install Go lang
 RUN cd /tmp && \
