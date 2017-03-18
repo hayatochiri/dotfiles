@@ -1,4 +1,13 @@
-/home/.local
+/home/*
+
+!/home/.gitconfig
+!/home/.tmux.conf
+!/home/.vimrc
+!/home/.zshrc
+
+!/home/.config
+/home/.config/*
+!/home/.config/fish
 /home/.config/fish/*
 !/home/.config/fish/config.fish
 !/home/.config/fish/conf.d
