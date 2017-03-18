@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER hayatochiri <dev@sucret.sakura.ne.jp>
 
-ENV GIT_VERSION v2.11.0
+ENV GIT_VERSION v2.12.0
 
 RUN apt-get update && \
   apt-get -y install tzdata && \
