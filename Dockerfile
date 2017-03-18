@@ -66,6 +66,9 @@ RUN cd /tmp && \
   rm -f go$GO_VERSION.linux-amd64.tar.gz && \
   mkdir -p /go
 
+# Install ghq
+RUN go get github.com/motemen/ghq
+
 RUN apt-get clean && \
   apt-get -y --purge remove $TEMPORARY_PACKAGES
 
