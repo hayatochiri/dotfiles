@@ -15,3 +15,15 @@ function g
   end
   commandline "git $result "
 end
+
+function git
+  if [ -z "$argv" ]
+    command git
+    return
+  end
+
+  switch $argv[1]
+  case '*'
+    command git $argv
+  end
+end
