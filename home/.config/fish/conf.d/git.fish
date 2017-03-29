@@ -18,6 +18,14 @@ end
 
 function git
   switch "$argv[1]"
+  case 'add'
+    command git status --short --ignored | fzf --ansi --multi | while read -l result
+      echo $result
+    end
+  case 'push'
+    git remote -v | grep '(push)' | fzf --exit-0 --multi | while read -l result
+      echo $result
+    end
   case '*'
     command git $argv
   end
