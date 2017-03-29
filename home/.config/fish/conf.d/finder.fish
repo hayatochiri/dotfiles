@@ -1,6 +1,6 @@
 function cd
   if [ -n "$argv" ]
-    cd $argv
+    builtin cd $argv
     return
   end
   while true
