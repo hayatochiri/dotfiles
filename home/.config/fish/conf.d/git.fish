@@ -17,12 +17,7 @@ function g
 end
 
 function git
-  if [ -z "$argv" ]
-    command git
-    return
-  end
-
-  switch $argv[1]
+  switch "$argv[1]"
   case '*'
     command git $argv
   end
