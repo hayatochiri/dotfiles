@@ -6,7 +6,7 @@ function cd
   while true
     clear
     ls -a
-    _dirs | fzf --height 5% --border --exit-0 | read -l result
+    _dirs | fzf --height 50% --border --exit-0 | read -l result
     switch "$result"
     case '.'
       return
