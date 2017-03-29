@@ -19,9 +19,12 @@ end
 function git
   switch "$argv[1]"
   case 'add'
-    command git status --short --ignored | fzf --ansi --multi | while read -l result
-      echo $result
+    set -e result
+    command git status --short --ignored | fzf --ansi --multi | awk '{print $2;}' | while read -l r
+      set result $result $r
     end
+    echo "git $argv $result"
+    command git $argv $result
   case 'push'
     git remote -v | grep '(push)' | fzf --exit-0 --multi | while read -l result
       echo $result
