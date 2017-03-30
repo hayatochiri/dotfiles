@@ -9,7 +9,8 @@ function g
     commandline "git "
     return
   end
-  echo -e "$subcommands" | fzf | read -l result
+  set git_aliases (git config --list | grep 'alias\.' | sed 's/alias\.\([^=]*\)=\(.*\)/\1\     => \2/')
+  echo -e "$subcommands\n$git_aliases" | fzf | awk '{print $1;}' | read -l result
   if [ -z "$result" ]
     return
   end
