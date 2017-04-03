@@ -28,7 +28,8 @@ function git
     command git $argv $result
   case 'push'
     git remote -v | grep '(push)' | fzf --exit-0 --multi | while read -l result
-      echo $result
+      echo "git $argv $result"
+      command git $argv $result
     end
   case '*'
     command git $argv
