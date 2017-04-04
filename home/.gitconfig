@@ -1,2 +1,12 @@
+[core]
+  editor = vim
+  quotepath = false
+  pager = nkf -w | LESSCHARSET=utf-8 less
 [ghq]
   root = ~/src
+[alias]
+  graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --branches --remotes --tags --date=short
+[color]
+  ui = true
+[color "diff"]
+  meta = yellow
