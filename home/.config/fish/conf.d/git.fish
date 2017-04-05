@@ -27,7 +27,7 @@ function git
     echo "git $argv $result"
     command git $argv $result
   case 'push'
-    git remote -v | grep '(push)' | fzf --exit-0 --multi | while read -l result
+    git remote -v | grep '(push)' | fzf --exit-0 --multi | awk '{print $1;}' | while read -l result
       echo "git $argv $result"
       command git $argv $result
     end
