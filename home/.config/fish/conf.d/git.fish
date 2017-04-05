@@ -36,6 +36,9 @@ function git
       echo "git $argv $result"
       command git $argv $result
     end
+  case 'blame'
+    command git $argv | fzf --exit-0 --tac | awk '{print $1;}' | read -l result
+    command git show $result
   case '*'
     command git $argv
   end
