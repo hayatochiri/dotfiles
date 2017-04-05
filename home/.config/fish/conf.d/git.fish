@@ -31,6 +31,11 @@ function git
       echo "git $argv $result"
       command git $argv $result
     end
+  case 'fetch'
+    git remote -v | grep '(fetch)' | fzf --exit-0 --multi | awk '{print $1;}' | while read -l result
+      echo "git $argv $result"
+      command git $argv $result
+    end
   case '*'
     command git $argv
   end
