@@ -49,6 +49,11 @@ RUN mkdir -p /tmp/git && \
   cd ../.. && \
   rm -rf git
 
+# Install git-forest
+RUN mkdir -p /usr/local/bin && \
+  wget -P /usr/local/bin https://raw.githubusercontent.com/takaaki-kasai/dotfiles/soliton/tkasai-dev/bin/git-forest && \
+  chmod +x /usr/local/bin/git-forest
+
 # Install fish
 RUN cd /tmp && \
   wget http://download.opensuse.org/repositories/shells:fish:release:2/Debian_8.0/Release.key && \
