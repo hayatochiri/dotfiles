@@ -1,3 +1,7 @@
+function gg
+  git-forest --style=20 --branches --remotes --tags $argv | less -RSX
+end
+
 function g
   # git --help -a
   switch (git --version)
