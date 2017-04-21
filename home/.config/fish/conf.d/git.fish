@@ -64,6 +64,8 @@ function _git_fetch
 end
 
 function _git_blame
+  command git $argv | fzf --exit-0 --tac | awk '{print $1;}' | read -l result
+  command git show $result
 end
 
 function _git_checkout
