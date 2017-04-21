@@ -57,6 +57,10 @@ function _git_push
 end
 
 function _git_fetch
+  git remote -v | grep '(fetch)' | fzf --exit-0 --multi | awk '{print $1;}' | while read -l result
+    echo "git $argv $result"
+    command git $argv $result
+  end
 end
 
 function _git_blame
