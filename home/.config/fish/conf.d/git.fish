@@ -25,27 +25,30 @@ end
 
 function git
   switch "$argv[1]"
-  case 'add'
-    set -e result
-    command git status --short --ignored | fzf --ansi --multi | awk '{print $2;}' | while read -l r
-      set result $result $r
-    end
-    echo "git $argv $result"
-    command git $argv $result
-  case 'push'
-    git remote -v | grep '(push)' | fzf --exit-0 --multi | awk '{print $1;}' | while read -l result
-      echo "git $argv $result"
-      command git $argv $result
-    end
-  case 'fetch'
-    git remote -v | grep '(fetch)' | fzf --exit-0 --multi | awk '{print $1;}' | while read -l result
-      echo "git $argv $result"
-      command git $argv $result
-    end
-  case 'blame'
-    command git $argv | fzf --exit-0 --tac | awk '{print $1;}' | read -l result
-    command git show $result
-  case '*'
-    command git $argv
+    case 'status'  ; _git_status   $argv
+    case 'add'     ; _git_add      $argv
+    case 'push'    ; _git_push     $argv
+    case 'fetch'   ; _git_fetch    $argv
+    case 'blame'   ; _git_blame    $argv
+    case 'checkout'; _git_checkout $argv
+    case '*'       ; command git $argv
   end
+end
+
+function _git_status
+end
+
+function _git_add
+end
+
+function _git_push
+end
+
+function _git_fetch
+end
+
+function _git_blame
+end
+
+function _git_checkout
 end
