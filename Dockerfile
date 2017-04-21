@@ -1,6 +1,8 @@
 FROM debian:jessie
 MAINTAINER hayatochiri <dev@sucret.sakura.ne.jp>
 
+ENV LANG C.UTF-8
+
 ENV GIT_VERSION v2.12.0
 
 # Look https://golang.org/dl/
