@@ -36,6 +36,7 @@ function git
 end
 
 function _git_status
+  command git $argv -su
 end
 
 function _git_add
