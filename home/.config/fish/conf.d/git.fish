@@ -69,4 +69,8 @@ function _git_blame
 end
 
 function _git_checkout
+  command git branch -a
+  for remote in (command git remote)
+    command git ls-remote --tags $remote
+  end
 end
