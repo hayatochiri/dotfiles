@@ -50,6 +50,10 @@ function _git_add
 end
 
 function _git_push
+  git remote -v | grep '(push)' | fzf --exit-0 --multi | awk '{print $1;}' | while read -l result
+    echo "git $argv $result"
+    command git $argv $result
+  end
 end
 
 function _git_fetch
