@@ -1,5 +1,17 @@
+set git_fzf_binds 'ctrl-v:page-down,ctrl-f:page-down,ctrl-b:page-up,ctrl-d:half-page-down,ctrl-u:half-page-up,alt-v:preview-page-down,alt-f:preview-page-down,alt-b:preview-page-up,alt-d:preview-page-down,alt-u:preview-page-up,alt-j:preview-down,alt-n:preview-down,alt-k:preview-up,alt-p:preview-up,alt-enter:toggle-preview'
+
+function gg-less
+  _gg $argv | less -RSX
+end
+
 function gg
-  git-forest --style=20 --branches --remotes --tags $argv | less -RSX
+  _gg $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color {1}"' --bind="$git_fzf_binds,enter:execute(git show --color {1} | less -RSX)"
+end
+
+function _gg
+  git-forest --style=20 --branches --remotes --tags $argv | while read -l r
+    echo "$r    "
+  end
 end
 
 function g
