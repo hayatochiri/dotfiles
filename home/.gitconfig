@@ -8,3 +8,5 @@
   ui = true
 [color "diff"]
   meta = yellow
+[alias]
+	cached = diff --cached
