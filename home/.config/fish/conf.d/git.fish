@@ -76,8 +76,22 @@ function _git_fetch
 end
 
 function _git_blame
-  command git $argv | fzf --exit-0 --tac | awk '{print $1;}' | read -l result
-  command git show $result
+  set current_path (pwd)'/'
+  builtin cd ./(git rev-parse --show-cdup)
+  set git_root_path (pwd)'/'
+
+  set default_query (echo $current_path | cut -c (string length "$git_root_path ")-)
+  set git_ls_files (string join "\n" (git ls-files))
+
+  builtin cd $current_path
+
+  echo -e "$git_ls_files" | while read -l r
+    echo -n (string length (echo $r | sed -e "s/[^\/]//g"))
+    echo " $r"
+  end | sort -rn | awk '{print $2;}' | fzf --exit-0 --tac --query="$default_query" --bind="$git_fzf_binds" --no-sort --preview="git log -U3 --color $git_root_path{}" | read -l result
+
+  command git $argv $result | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
+  commandline "git show $result"
 end
 
 function _git_checkout
