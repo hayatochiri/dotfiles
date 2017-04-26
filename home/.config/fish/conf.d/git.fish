@@ -54,7 +54,7 @@ end
 function _git_add
   echo $argv
   set -e result
-  command git status --short --ignored | fzf --ansi --multi | awk '{print $2;}' | while read -l r
+  command git status -su | fzf --ansi --multi | awk '{print $2;}' | while read -l r
     set result $result $r
   end
   echo "git $argv $result"
