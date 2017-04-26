@@ -1,0 +1,12 @@
+#!/bin/sh
+
+rm ~/.gitconfig
+ln -s "`pwd`/home/.gitconfig" ~/.gitconfig
+
+mkdir -p ~/.config/fish/conf.d
+touch ~/.config/fish/config.fish
+
+ls -1 home/.config/fish/conf.d/ | while read -r f; do
+  rm -f ~/.config/fish/conf.d/_$f
+  ln -s "`pwd`/home/.config/fish/conf.d/$f" ~/.config/fish/conf.d/_$f
+done
