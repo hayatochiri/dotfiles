@@ -44,7 +44,7 @@ function git
     case 'push'    ; _git_push     $argv
     case 'fetch'   ; _git_fetch    $argv
     case 'blame'   ; _git_blame    $argv
-    case 'checkout'; _git_checkout $argv
+    # case 'checkout'; _git_checkout $argv
     case '*'       ; command git $argv
   end
 end
@@ -97,9 +97,13 @@ function _git_blame
   commandline "git show $result"
 end
 
-function _git_checkout
-  command git branch -a
-  for remote in (command git remote)
-    command git ls-remote --tags $remote
-  end
-end
+# function _git_checkout
+#   echo -e "branches\ntags\ngraph" | fzf --exit-0 --print-query --expect=ctrl-x,ctrl-f
+#
+#   switch "$result"
+#
+#   command git branch -a
+#   for remote in (command git remote)
+#     command git ls-remote --tags $remote
+#   end
+# end
