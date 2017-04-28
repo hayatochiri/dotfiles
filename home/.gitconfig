@@ -10,3 +10,7 @@
   meta = yellow
 [alias]
 	cached = diff --cached
+[diff]
+  tool = subl2
+[difftool "subl2"]
+  cmd = fish -c \"subl2 $LOCAL $REMOTE\"
