@@ -44,6 +44,7 @@ function git
     case 'push'    ; _git_push     $argv
     case 'fetch'   ; _git_fetch    $argv
     case 'blame'   ; _git_blame    $argv
+    case 'difftool'; _git_difftool $argv
     # case 'checkout'; _git_checkout $argv
     case '*'       ; command git $argv
   end
@@ -95,6 +96,14 @@ function _git_blame
 
   command git $argv $result | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
   commandline "git show $result"
+end
+
+function _git_difftool
+  if [ (uname) = 'Darwin' ]
+    yes 'y' | command git $argv
+  else
+    command git $argv
+  end
 end
 
 # function _git_checkout
