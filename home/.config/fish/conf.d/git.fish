@@ -76,6 +76,7 @@ function _git_fetch
 end
 
 function _git_blame
+  # TODO: git_root_path の取得をスマートにする(コマンドで取得できる)
   set current_path (pwd)'/'
   builtin cd ./(git rev-parse --show-cdup)
   set git_root_path (pwd)'/'
