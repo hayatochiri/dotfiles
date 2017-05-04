@@ -51,7 +51,7 @@ RUN mkdir -p /tmp/git && \
 
 # Install git-forest
 RUN mkdir -p /usr/local/bin && \
-  wget -P /usr/local/bin https://raw.githubusercontent.com/takaaki-kasai/dotfiles/soliton/tkasai-dev/bin/git-forest && \
+  wget -P /usr/local/bin/git-forest https://raw.githubusercontent.com/takaaki-kasai/dotfiles/soliton/tkasai-dev/bin/git-foresta && \
   chmod +x /usr/local/bin/git-forest
 
 # Install fish
