@@ -41,7 +41,7 @@ function git
   switch "$argv[1]"
     case 'status'  ; _git_status   $argv
     case 'add'     ; _git_add      $argv
-    case 'push'    ; _git_push     $argv
+    # case 'push'    ; _git_push     $argv
     case 'fetch'   ; _git_fetch    $argv
     case 'blame'   ; _git_blame    $argv
     case 'difftool'; _git_difftool $argv
