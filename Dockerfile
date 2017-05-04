@@ -7,7 +7,7 @@ ENV GIT_VERSION v2.12.0
 
 # Look https://golang.org/dl/
 ENV GO_VERSION 1.8
-ENV GOPATH /go
+ENV GOPATH /root/go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
 RUN apt-get update && \
@@ -73,7 +73,7 @@ RUN cd /tmp && \
   wget https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz && \
   tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz && \
   rm -f go$GO_VERSION.linux-amd64.tar.gz && \
-  mkdir -p /go
+  mkdir -p /root/go
 
 # Install ghq
 RUN go get github.com/motemen/ghq
