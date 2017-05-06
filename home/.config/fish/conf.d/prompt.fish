@@ -2,6 +2,8 @@ function fish_prompt
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
   echo -n '─['
+  echo -n (whoami)@(hostname)
+  echo -n ' > '
 
   if [ "$IS_REPOSITORY" = 'true' ]
     _prompt_git
