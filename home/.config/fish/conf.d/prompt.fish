@@ -19,7 +19,7 @@ end
 function _prompt_git
   set TOPLEVEL (command git rev-parse --show-toplevel)
   set PREFIX (command git rev-parse --show-prefix)
-  set BRAnCh (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+  set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
-  echo -n "$TOPLEVEL > $BRAnCh > $PREFIX"
+  echo -n "$TOPLEVEL > $BRANCH > $PREFIX"
 end
