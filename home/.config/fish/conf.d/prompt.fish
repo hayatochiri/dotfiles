@@ -1,13 +1,15 @@
 function fish_prompt
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
+  echo -n '─['
+
   if [ "$IS_REPOSITORY" = 'true' ]
     _prompt_git
   else
     echo -n (pwd)
   end
 
-  echo -e "\n>"
+  echo -e "\n└──>"
 end
 
 # function fish_right_prompt
