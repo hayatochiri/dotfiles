@@ -1,6 +1,11 @@
 function fish_prompt
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
+  # TODO: super user?
+  # TODO: git statuses
+  # TODO: short path(e.g. /path/to/dir -> /p/t/dir)
+  # TODO: color
+
   echo -n '─['
   echo -n (whoami)@(hostname)
   echo -n ' > '
