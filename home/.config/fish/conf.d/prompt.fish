@@ -5,6 +5,8 @@ function fish_prompt
   # TODO: git statuses
   # TODO: short path(e.g. /path/to/dir -> /p/t/dir)
   # TODO: color
+  # TODO: command status
+  # TODO: command exec time
 
   echo -n '─['
   echo -n (whoami)@(hostname)
