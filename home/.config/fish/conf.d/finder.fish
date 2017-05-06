@@ -1,3 +1,20 @@
+function _up_dir
+  for i in (seq $argv[1])
+    builtin cd ..
+  end
+  ls
+end
+function ..          ; _up_dir 1 ; end
+function ...         ; _up_dir 2 ; end
+function ....        ; _up_dir 3 ; end
+function .....       ; _up_dir 4 ; end
+function ......      ; _up_dir 5 ; end
+function .......     ; _up_dir 6 ; end
+function ........    ; _up_dir 7 ; end
+function .........   ; _up_dir 8 ; end
+function ..........  ; _up_dir 9 ; end
+function ........... ; _up_dir 10; end
+
 function cd
   if [ -n "$argv" ]
     builtin cd $argv
