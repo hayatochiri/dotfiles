@@ -38,10 +38,8 @@ end
 
 # unlimited cd
 function ucd
-  if [ -z "$argv" ]
-    set argv '.'
-  end
-  find $argv -type d 2>/dev/null | fzf --exit-0 | read -l result
+  set CURRENT_PATH (pwd)
+  find / -type d 2>/dev/null | fzf --exit-0 --query="$CURRENT_PATH" | read -l result
   if [ -z "$result" ]
     return
   end
