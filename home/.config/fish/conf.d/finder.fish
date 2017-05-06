@@ -1,6 +1,7 @@
 function cd
   if [ -n "$argv" ]
     builtin cd $argv
+    ls
     return
   end
   while true
