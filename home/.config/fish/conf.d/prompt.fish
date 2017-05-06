@@ -11,7 +11,13 @@ function fish_prompt
     echo -n (pwd)
   end
 
-  echo -e "\n└──>"
+  echo -e -n "\n└──"
+  if [ (whoami) = 'root' ]
+    echo -n '# >'
+  else
+    echo -n '$ >'
+  end
+  echo
 end
 
 # function fish_right_prompt
