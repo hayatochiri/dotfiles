@@ -5,7 +5,7 @@ function gg-less
 end
 
 function gg
-  _gg $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color {1}"' --bind="$git_fzf_binds,enter:execute(git show --color {1} | less -RSX)"
+  _gg $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
 end
 
 function _gg
