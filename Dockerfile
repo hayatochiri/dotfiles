@@ -49,10 +49,10 @@ RUN mkdir -p /tmp/git && \
   cd ../.. && \
   rm -rf git
 
-# Install git-forest
+# Install git-foresta
 RUN mkdir -p /usr/local/bin && \
-  wget -P /usr/local/bin/git-forest https://raw.githubusercontent.com/takaaki-kasai/dotfiles/soliton/tkasai-dev/bin/git-foresta && \
-  chmod +x /usr/local/bin/git-forest
+  wget -P /usr/local/bin https://raw.githubusercontent.com/takaaki-kasai/git-foresta/master/git-foresta && \
+  chmod +x /usr/local/bin/git-foresta
 
 # Install fish
 RUN cd /tmp && \
