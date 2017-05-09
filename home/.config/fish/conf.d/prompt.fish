@@ -1,7 +1,6 @@
 function fish_prompt
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
-  # TODO: super user?
   # TODO: git statuses
   # TODO: short path(e.g. /path/to/dir -> /p/t/dir)
   # TODO: color
@@ -20,9 +19,9 @@ function fish_prompt
 
   echo -e -n "\n└──"
   if [ (whoami) = 'root' ]
-    echo -n '# >'
+    echo -n '# '
   else
-    echo -n '$ >'
+    echo -n '$ '
   end
   echo
 end
