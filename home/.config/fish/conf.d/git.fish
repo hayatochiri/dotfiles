@@ -54,6 +54,27 @@ function _git_status
   command git $argv -su
 end
 
+function _git_status_colorize
+  git status -su | while read -l r
+    set STAGING (string sub -s 1 -l 1 "$r")
+    set UNSTAGING (string sub -s 2 -l 1 "$r")
+    set TARGET_FILE (string sub -s 3 "$r")
+
+    if [ "$UNSTAGING" = 'U' ]
+      set_color red
+    else
+      set_color green
+    end
+    echo -n "$STAGING"
+
+    set_color red
+    echo -n "$UNSTAGING"
+
+    set_color normal
+    echo "$TARGET_FILE"
+  end
+end
+
 function _git_add
   echo $argv
   set -e result
