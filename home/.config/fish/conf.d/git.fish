@@ -62,7 +62,7 @@ function _git_status_colorize
     set UNSTAGING (string sub -s 2 -l 1 "$r")
     set TARGET_FILE (string sub -s 3 "$r")
 
-    if [ "$UNSTAGING" = 'U' ]
+    if [ "$UNSTAGING" = 'U' -o "$UNSTAGING" = '?' ]
       set_color red
     else
       set_color green
