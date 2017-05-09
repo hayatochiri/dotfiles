@@ -1,3 +1,5 @@
+set fish_prompt_pwd_dir_length 3
+
 function fish_prompt
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
@@ -35,8 +37,10 @@ end
 # end
 
 function _prompt_git
-  set TOPLEVEL (command git rev-parse --show-toplevel)
-  set PREFIX (command git rev-parse --show-prefix)
+  set CURRENT (command pwd)
+  set TOPLEVEL (builtin cd (command git rev-parse --show-toplevel); and prompt_pwd)
+  builtin cd $CURRENT
+  set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
   echo -n "$TOPLEVEL > $BRANCH > $PREFIX"
