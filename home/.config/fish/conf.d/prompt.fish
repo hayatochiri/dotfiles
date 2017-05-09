@@ -7,7 +7,9 @@ function fish_prompt
   # TODO: command status
   # TODO: command exec time
 
-  echo -n '─['
+  echo -n '╦═══ '
+  # echo -n '┬─── '
+  # echo -n '┳━━━ '
   echo -n (whoami)@(hostname)
   echo -n ' > '
 
@@ -17,7 +19,9 @@ function fish_prompt
     echo -n (pwd)
   end
 
-  echo -e -n "\n└──"
+  echo -e -n "\n╚═ "
+  # echo -e -n "\n└─ "
+  # echo -e -n "\n┗━ "
   if [ (whoami) = 'root' ]
     echo -n '# '
   else
