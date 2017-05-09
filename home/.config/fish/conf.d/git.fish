@@ -9,7 +9,7 @@ function gg
 end
 
 function _gg
-  git-foresta --style=20 --branches --remotes --tags $argv | while read -l r
+  git-foresta --branches --remotes --tags $argv | while read -l r
     echo "$r    "
   end
 end
