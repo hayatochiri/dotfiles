@@ -78,7 +78,7 @@ end
 function _git_add
   echo $argv
   set -e result
-  command git status -su | fzf --exit-0 --ansi --multi --bind="$git_fzf_binds,ctrl-a:select-all" | awk '{print $2;}' | while read -l r
+  _git_status_colorize| fzf --exit-0 --ansi --multi --bind="$git_fzf_binds,ctrl-a:select-all" --preview='git diff --color {2}' | awk '{print $2;}' | while read -l r
     set result $result $r
   end
   echo "git $argv $result"
