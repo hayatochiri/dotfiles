@@ -10,8 +10,6 @@ function fish_prompt
   # TODO: command exec time
 
   echo -n '╦═══ '
-  # echo -n '┬─── '
-  # echo -n '┳━━━ '
   echo -n (whoami)@(hostname)
   test -e /etc/DOTFILES_EMULATOR; and echo -n '(emulator)'
   echo -n ' > '
@@ -23,8 +21,6 @@ function fish_prompt
   end
 
   echo -e -n "\n╚═ "
-  # echo -e -n "\n└─ "
-  # echo -e -n "\n┗━ "
   if [ (whoami) = 'root' ]
     echo -n '# '
   else
