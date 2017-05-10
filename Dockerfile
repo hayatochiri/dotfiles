@@ -7,7 +7,7 @@ ENV GIT_VERSION v2.12.0
 
 # Look https://golang.org/dl/
 ENV GO_VERSION 1.8
-ENV GOPATH /root/.go
+ENV GOPATH /.go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
 RUN apt-get update && \
@@ -80,5 +80,7 @@ RUN go get github.com/motemen/ghq
 
 RUN apt-get clean && \
   apt-get -y --purge remove $TEMPORARY_PACKAGES
+
+RUN touch /etc/DOTFILES_EMULATOR
 
 CMD ["/usr/bin/fish"]
