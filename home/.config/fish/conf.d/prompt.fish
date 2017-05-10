@@ -13,6 +13,7 @@ function fish_prompt
   # echo -n '┬─── '
   # echo -n '┳━━━ '
   echo -n (whoami)@(hostname)
+  test -e /etc/DOTFILES_EMULATOR; and echo -n '(emulator)'
   echo -n ' > '
 
   if [ "$IS_REPOSITORY" = 'true' ]
