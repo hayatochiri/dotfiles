@@ -51,7 +51,7 @@ function _prompt_git
 
   echo -n (_highlight_path $TOPLEVEL)
   echo -n " > $BRANCH > "
-  echo -n (_highlight_path $PREFIX)
+  echo -n (_highlight_path "/$PREFIX")
 end
 
 function _highlight_path
