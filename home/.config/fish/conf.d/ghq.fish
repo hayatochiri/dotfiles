@@ -23,5 +23,9 @@ function _ghq_previewer
   git --git-dir=$ghq_root_path/$argv/.git/ remote -v
   echo ''
   echo '[root]'
-  gls -alpF --color=yes $ghq_root_path/$argv
+  if [ (uname) = 'Darwin' ]
+    gls -alpF --color=yes $ghq_root_path/$argv
+  else
+    command ls --color -al $ghq_root_path/$argv
+  end
 end
