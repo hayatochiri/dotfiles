@@ -29,6 +29,7 @@ function fish_prompt
   else
     echo -n '$ '
   end
+
   echo
 end
 
