@@ -43,9 +43,12 @@ function fish_prompt
   echo
 end
 
-# function fish_right_prompt
-#   echo '<hoge'
-# end
+function fish_right_prompt
+  set_color brblack
+  [ -z "$CMD_DURATION" -o "$CMD_DURATION" -eq 0 ]; or echo -n "$CMD_DURATION ms < "
+  echo (date "+%c")
+  set_color normal
+end
 
 function _prompt_git
   set CURRENT (command pwd)
