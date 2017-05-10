@@ -63,7 +63,8 @@ function _highlight_path
       set_color brblack
       echo -n '/'
     end
-    set_color normal
+    set_color --bold blue
     echo -n $i
   end
+  set_color normal
 end
