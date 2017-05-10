@@ -19,7 +19,7 @@ function fish_prompt
   if [ "$IS_REPOSITORY" = 'true' ]
     _prompt_git
   else
-    echo -n (pwd)
+    echo -n (_highlight_path (prompt_pwd))
   end
 
   echo -e -n "\n╚═ "
@@ -45,5 +45,21 @@ function _prompt_git
   set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
-  echo -n "$TOPLEVEL > $BRANCH > $PREFIX"
+  echo -n (_highlight_path $TOPLEVEL)
+  echo -n " > $BRANCH > "
+  echo -n (_highlight_path $PREFIX)
+end
+
+function _highlight_path
+  set IS_FIRST 'TRUE'
+  for i in (string split '/' "$argv")
+    if [ "$IS_FIRST" = 'TRUE' ]
+      set -u IS_FIRST
+    else
+      set_color brblack
+      echo -n '/'
+    end
+    set_color normal
+    echo -n $i
+  end
 end
