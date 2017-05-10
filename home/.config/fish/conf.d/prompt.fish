@@ -18,7 +18,12 @@ function fish_prompt
   # TODO: command exec time
 
   echo -n '╦═══ '
-  echo -n (whoami)@(hostname)
+
+  set_color brcyan; echo -n (whoami)
+  set_color normal; echo -n '@'
+  set_color --bold brblack; echo -n (hostname)
+  set_color normal
+
   test -e /etc/DOTFILES_EMULATOR; and echo -n '(emulator)'
   echo -n ' > '
 
