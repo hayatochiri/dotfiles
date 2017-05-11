@@ -12,12 +12,6 @@ function fish_prompt
   set STATUS $status
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
-  # TODO: git statuses
-  # TODO: short path(e.g. /path/to/dir -> /p/t/dir)
-  # TODO: color
-  # TODO: command status
-  # TODO: command exec time
-
   echo -n '╦═══ '
 
   set_color brcyan; echo -n (whoami)
