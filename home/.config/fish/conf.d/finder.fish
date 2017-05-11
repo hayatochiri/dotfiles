@@ -18,7 +18,7 @@ function ........... ; _up_dir 10; end
 function cd
   if [ -n "$argv" ]
     builtin cd $argv
-    ls
+    ls -a
     return
   end
   while true
