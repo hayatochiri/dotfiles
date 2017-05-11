@@ -9,6 +9,7 @@ end
 set fish_prompt_pwd_dir_length 3
 
 function fish_prompt
+  set STATUS $status
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
   # TODO: git statuses
@@ -34,12 +35,15 @@ function fish_prompt
   end
 
   echo -e -n "\n╚═ "
+
+  test $STATUS != 0; and set_color red
   if [ (whoami) = 'root' ]
     echo -n '# '
   else
     echo -n '$ '
   end
 
+  set_color normal
   echo
 end
 
