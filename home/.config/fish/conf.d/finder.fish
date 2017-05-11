@@ -19,6 +19,7 @@ function cd
   if [ -n "$argv" ]
     builtin cd $argv
     ls -a
+    echo
     return
   end
   while true
