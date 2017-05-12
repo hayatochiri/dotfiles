@@ -1,3 +1,5 @@
+set fish_prompt_pwd_dir_length 3
+
 function show_colors
   set COLORS (string split ' ' 'black red green yellow blue magenta cyan white brblack brred brgreen bryellow brblue brmagenta brcyan brwhite')
   set_color normal
@@ -5,8 +7,6 @@ function show_colors
   set_color normal
   echo -n 'Bold  : '; for c in $COLORS; set_color --bold $c; echo -n "$c "; end; echo
 end
-
-set fish_prompt_pwd_dir_length 3
 
 function fish_prompt
   set STATUS $status
