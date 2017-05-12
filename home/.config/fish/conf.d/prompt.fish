@@ -91,8 +91,8 @@ function _git_highlight_path
 
   set_color brblack
   echo -n '/'
-  #set_color normal
-  set_color brgreen
+  set_color normal
+  set_color cyan
   echo -n $PWDS[-1]
 
   set_color normal
