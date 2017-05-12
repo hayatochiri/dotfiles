@@ -55,7 +55,7 @@ function _prompt_git
   set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
-  echo -n (_highlight_path $TOPLEVEL)
+  echo -n (_git_highlight_path $TOPLEVEL)
   echo -n " > $BRANCH > "
   echo -n (_highlight_path "/$PREFIX")
 end
@@ -72,5 +72,28 @@ function _highlight_path
     set_color --bold blue
     echo -n $i
   end
+  set_color normal
+end
+
+function _git_highlight_path
+  set IS_FIRST 'TRUE'
+  set PWDS (string split '/' "$argv")
+  for i in $PWDS[1..-2]
+    if [ "$IS_FIRST" = 'TRUE' ]
+      set -u IS_FIRST
+    else
+      set_color brblack
+      echo -n '/'
+    end
+    set_color --bold blue
+    echo -n $i
+  end
+
+  set_color brblack
+  echo -n '/'
+  #set_color normal
+  set_color brgreen
+  echo -n $PWDS[-1]
+
   set_color normal
 end
