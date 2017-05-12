@@ -117,7 +117,7 @@ function _git_blame
     echo " $r"
   end | sort -rn | awk '{print $2;}' | fzf --exit-0 --tac --query="$default_query" --bind="$git_fzf_binds" --no-sort --preview="git log -U3 --color $git_root_path{}" | read -l result
 
-  command git $argv $result | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
+  command git $argv "$git_root_path$result" | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
   commandline "git show $result"
 end
 
