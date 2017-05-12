@@ -55,9 +55,29 @@ function _prompt_git
   set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
-  echo -n (_git_highlight_path $TOPLEVEL)
-  echo -n " > $BRANCH > "
-  echo -n (_highlight_path "/$PREFIX")
+  echo -n (_git_highlight_path $TOPLEVEL)' > '
+
+  set_color normal
+  switch (_get_git_status)
+    case 'clean'     ; set_color green
+    case 'staging'   ; set_color yellow
+    case 'unstaging' ; set_color red
+  end
+  echo -n $BRANCH
+
+  set_color normal
+  echo -n ' > '(_highlight_path "/$PREFIX")
+end
+
+function _get_git_status
+  set STATUS 'clean'
+  command git status --porcelain | while read -l r
+    set STAGING (string sub -s 1 -l 1 "$r")
+    set UNSTAGING (string sub -s 2 -l 1 "$r")
+    test "$STAGING" != 'U'; and test "$STAGING" != '?'; and test "$STAGING" != ' '; and set STATUS 'staging'; and break
+    set STATUS 'unstaging'
+  end
+  echo $STATUS
 end
 
 function _highlight_path
