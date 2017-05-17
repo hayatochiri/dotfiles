@@ -1,3 +1,7 @@
+function ls
+  gls -p -F --color=tty $argv
+end
+
 function _up_dir
   for i in (seq $argv[1])
     builtin cd ..
