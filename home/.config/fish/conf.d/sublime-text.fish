@@ -9,3 +9,11 @@ function subl2
     vimdiff $argv[1] "$git_root/$argv[2]"
   end
 end
+
+if [ (uname) = 'Darwin' ]
+  function s
+    for f in $argv
+      open -a 'Sublime Text.app' $f
+    end
+  end
+end
