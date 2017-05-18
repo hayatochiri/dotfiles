@@ -3,14 +3,14 @@ set ghq_root_path (command ghq root)
 
 function ghq
   if [ -z "$argv" ]
-     eval "$GOPATH/bin/ghq list" | fzf --exit-0 --bind="$ghq_fzf_binds" --preview="fish -c \"_ghq_previewer {}\"" | read -l result
+     eval "command ghq list" | fzf --exit-0 --bind="$ghq_fzf_binds" --preview="fish -c \"_ghq_previewer {}\"" | read -l result
     if [ -z "$result" ]
       return
     end
     builtin cd "$ghq_root_path/$result"
     ls
   else
-    eval "$GOPATH/bin/ghq $argv"
+    eval "command ghq $argv"
   end
 end
 
