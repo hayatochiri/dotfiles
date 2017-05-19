@@ -1,5 +1,9 @@
 function ls
-  gls -p -F --color=tty $argv
+  if [ (uname) = 'Darwin' ]
+    gls -p -F --color=tty $argv
+  else
+    command ls -p -F --color=tty $argv
+  end
 end
 
 function _up_dir
