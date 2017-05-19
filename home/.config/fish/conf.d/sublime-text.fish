@@ -10,6 +10,18 @@ function subl2
   end
 end
 
+# merge tool?
+# http://www.sublimerge.com/sm2/docs/vcs-integration.html#command-templates-diff-tool-2-way
+function subl3
+  echo $argv[2]
+  set git_root (git rev-parse --show-toplevel)
+  if [ (uname) = 'Darwin' ]
+    /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n --wait "$argv[1]" "$argv[2]" --command "sublimelinter_disable_linting" --command "sublimerge_diff_views {\"left_read_only\": true, \"right_read_only\": false}"
+  else
+    vimdiff $argv[1] "$git_root/$argv[2]"
+  end
+end
+
 if [ (uname) = 'Darwin' ]
   function s
     for f in $argv
