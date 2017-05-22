@@ -22,6 +22,14 @@ function subl3
   end
 end
 
+function subl3_merge
+  set git_root (git rev-parse --show-toplevel)
+  if [ (uname) = 'Darwin' ]
+    s $argv[4]
+    /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n --wait "$argv[1]" "$argv[2]" "$argv[3]" "$argv[4]" --command "sublimelinter_disable_linting" --command "sublimerge_diff_views"
+  end
+end
+
 if [ (uname) = 'Darwin' ]
   function s
     for f in $argv

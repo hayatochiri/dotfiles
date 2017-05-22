@@ -14,3 +14,7 @@
   tool = subl2
 [difftool "subl2"]
   cmd = fish -c \"subl2 $LOCAL $REMOTE\"
+[merge]
+  tool = subl3_merge
+[mergetool "subl3_merge"]
+  cmd = fish -c \"subl3_merge $REMOTE $BASE $LOCAL $MERGED\"

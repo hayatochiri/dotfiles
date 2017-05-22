@@ -43,14 +43,15 @@ end
 
 function git
   switch "$argv[1]"
-    case 'status'  ; _git_status   $argv
-    case 'add'     ; _git_add      $argv
+    case 'status'   ; _git_status    $argv
+    case 'add'      ; _git_add       $argv
     # case 'push'    ; _git_push     $argv
-    case 'fetch'   ; _git_fetch    $argv
-    case 'blame'   ; _git_blame    $argv
-    case 'difftool'; _git_difftool $argv
+    case 'fetch'    ; _git_fetch     $argv
+    case 'blame'    ; _git_blame     $argv
+    case 'difftool' ; _git_difftool  $argv
+    case 'mergetool'; _git_mergetool $argv
     # case 'checkout'; _git_checkout $argv
-    case '*'       ; command git $argv
+    case '*'        ; command git $argv
   end
 end
 
@@ -129,6 +130,10 @@ function _git_difftool
   else
     command git $argv
   end
+end
+
+function _git_mergetool
+  command git $argv
 end
 
 # function _git_checkout
