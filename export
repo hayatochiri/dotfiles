@@ -10,3 +10,5 @@ ls -1 home/.config/fish/conf.d/ | while read -r f; do
   rm -f ~/.config/fish/conf.d/_$f
   ln -s "`pwd`/home/.config/fish/conf.d/$f" ~/.config/fish/conf.d/_$f
 done
+
+wget -O ~/.config/fish/conf.d/chtc.fish https://raw.githubusercontent.com/chrisshiplet/fish-title/master/chtc.fish
