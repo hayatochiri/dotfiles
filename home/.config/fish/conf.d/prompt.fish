@@ -54,16 +54,24 @@ function _prompt_git
   builtin cd $CURRENT
   set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+  set STATUS (_get_git_status)
 
   echo -n (_git_highlight_path $TOPLEVEL)' > '
 
   set_color normal
-  switch (_get_git_status)
+  switch $STATUS
     case 'clean'     ; set_color green
     case 'staging'   ; set_color yellow
     case 'unstaging' ; set_color red
   end
   echo -n $BRANCH
+
+  if [ "$STATUS" = 'staging' ]
+    set_color brblack
+    echo -n ' signer '
+    set_color normal
+    echo -n (command git config user.name)
+  end
 
   set_color normal
   echo -n ' > '(_highlight_path "/$PREFIX")
