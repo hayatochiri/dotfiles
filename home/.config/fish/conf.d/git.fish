@@ -49,7 +49,7 @@ function git
   switch "$SUBCOMMAND"
     case 'status'   ; _git_status    $argv
     case 'add'      ; _git_add       $argv
-    # case 'push'    ; _git_push     $argv
+    case 'push'     ; _git_push     $argv
     case 'fetch'    ; _git_fetch     $argv
     case 'blame'    ; _git_blame     $argv
     case 'difftool' ; _git_difftool  $argv
@@ -95,8 +95,8 @@ end
 
 function _git_push
   git remote -v | grep '(push)' | fzf --exit-0 --multi --bind="$git_fzf_binds,ctrl-a:select-all" | awk '{print $1;}' | while read -l result
-    echo "git $argv $result"
-    command git $argv $result
+    echo "git push $result $argv"
+    command git push $result $argv
   end
 end
 
