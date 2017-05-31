@@ -85,7 +85,6 @@ function _git_status_colorize
 end
 
 function _git_add
-  echo $argv
   set -e result
   _git_status_colorize| fzf --exit-0 --ansi --multi --bind="$git_fzf_binds,ctrl-a:select-all" --preview='git diff --color {2..-1}' | string sub -s 4 | while read -l r
     set result $result $r
