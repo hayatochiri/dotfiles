@@ -44,7 +44,9 @@ function g
 end
 
 function git
-  switch "$argv[1]"
+  set SUBCOMMAND $argv[1]
+  set --erase argv[1]
+  switch "$SUBCOMMAND"
     case 'status'   ; _git_status    $argv
     case 'add'      ; _git_add       $argv
     # case 'push'    ; _git_push     $argv
@@ -53,12 +55,12 @@ function git
     case 'difftool' ; _git_difftool  $argv
     case 'mergetool'; _git_mergetool $argv
     # case 'checkout'; _git_checkout $argv
-    case '*'        ; command git $argv
+    case '*'        ; command git $SUBCOMMAND $argv
   end
 end
 
 function _git_status
-  command git $argv -su
+  command git status $argv -su
 end
 
 function _git_status_colorize
@@ -88,8 +90,8 @@ function _git_add
   _git_status_colorize| fzf --exit-0 --ansi --multi --bind="$git_fzf_binds,ctrl-a:select-all" --preview='git diff --color {2..-1}' | string sub -s 4 | while read -l r
     set result $result $r
   end
-  echo "git $argv $result"
-  command git $argv $result
+  echo "git add $argv $result"
+  command git add $argv $result
 end
 
 function _git_push
@@ -101,8 +103,8 @@ end
 
 function _git_fetch
   git remote -v | grep '(fetch)' | fzf --exit-0 --multi --bind="$git_fzf_binds,ctrl-a:select-all" | awk '{print $1;}' | while read -l result
-    echo "git $argv $result"
-    command git $argv $result
+    echo "git fetch $argv $result"
+    command git fetch $argv $result
   end
 end
 
@@ -122,20 +124,20 @@ function _git_blame
     echo " $r"
   end | sort -rn | awk '{print $2;}' | fzf --exit-0 --tac --query="$default_query" --bind="$git_fzf_binds" --no-sort --preview="git log -U3 --color $git_root_path{}" | read -l result
 
-  command git $argv "$git_root_path$result" | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
+  command git blame $argv "$git_root_path$result" | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
   commandline "git show $result"
 end
 
 function _git_difftool
   if [ (uname) = 'Darwin' ]
-    yes 'y' | command git $argv
+    yes 'y' | command git difftool $argv
   else
-    command git $argv
+    command git difftool $argv
   end
 end
 
 function _git_mergetool
-  command git $argv
+  command git mergetool $argv
 end
 
 # function _git_checkout
