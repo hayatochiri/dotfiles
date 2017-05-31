@@ -85,12 +85,16 @@ function _git_status_colorize
 end
 
 function _git_add
-  set -e result
-  _git_status_colorize| fzf --exit-0 --ansi --multi --bind="$git_fzf_binds,ctrl-a:select-all" --preview='git diff --color {2..-1}' | string sub -s 4 | while read -l r
-    set result $result $r
+  while [ (command git diff --name-only | wc -l | string trim -rl) != '0' ]
+    set -u result
+    _git_status_colorize| fzf --exit-0 --ansi --bind="$git_fzf_binds" --expect=ctrl-c --preview='git diff --color {2..-1}' | string sub -s 4 | while read -l r
+      set result $result $r
+    end
+    test -z "$result"; and break
+    test "$result[1]" = 'l-c'; and git diff --color --cached | less -RSX; and continue
+    command git add $argv $result[2]
   end
-  echo "git add $argv $result"
-  command git add $argv $result
+  echo 'There is no unstag file.'
 end
 
 function _git_push
