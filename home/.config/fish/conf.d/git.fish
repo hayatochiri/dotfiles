@@ -76,8 +76,20 @@ function _git_status_colorize
   end
 end
 
+function _is_untracked_file_exist
+  set EXIST 'FALSE'
+  for i in (git status --porcelain)
+    set UNTRACKED (string sub -s 2 -l 1 "$i")
+    if [ "$UNTRACKED" != ' ' ]
+      set EXIST 'TRUE'
+      break
+    end
+  end
+  echo "$EXIST"
+end
+
 function _git_add
-  while [ (command git diff --name-only | wc -l | string trim -rl) != '0' ]
+  while [ (_is_untracked_file_exist) = 'TRUE' ]
     set -u result
     _git_status_colorize| fzf --exit-0 --ansi --bind="$git_fzf_binds" --expect=ctrl-c --preview='git diff --color {2..-1}' | string sub -s 4 | while read -l r
       set result $result $r
