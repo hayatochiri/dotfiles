@@ -10,6 +10,12 @@ function subl2
   end
 end
 
+if [ (uname) = 'Darwin' ]
+  git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w"
+else
+  git config --global core.editor vim
+end
+
 # merge tool?
 # http://www.sublimerge.com/sm2/docs/vcs-integration.html#command-templates-diff-tool-2-way
 function subl3
