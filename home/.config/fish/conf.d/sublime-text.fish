@@ -42,4 +42,5 @@ if [ (uname) = 'Darwin' ]
       open -a 'Sublime Text.app' $f
     end
   end
+  complete -c s -w less
 end
