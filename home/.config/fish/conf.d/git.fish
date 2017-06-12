@@ -104,6 +104,14 @@ function _git_add
 end
 
 function _git_push
+  if [ (count $argv) = 0 ]
+    command git branch -a --color | grep -v 'HEAD' | fzf --ansi --tac --exit-0 --bind="$git_fzf_binds" | string sub -s 3 | read -l result
+    if [ (string sub -s 1 -l 8 "$result") = 'remotes/' ]
+      set result (string sub -s 9 "$result")
+    end
+    commandline "git push $result"
+    return
+  end
   git remote -v | grep '(push)' | fzf --exit-0 --multi --bind="$git_fzf_binds,ctrl-a:select-all" | awk '{print $1;}' | while read -l result
     echo "git push $result $argv"
     command git push $result $argv
