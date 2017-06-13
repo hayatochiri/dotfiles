@@ -50,7 +50,7 @@ function git
     case 'blame'    ; _git_blame     $argv
     case 'difftool' ; _git_difftool  $argv
     case 'mergetool'; _git_mergetool $argv
-    # case 'checkout'; _git_checkout $argv
+    case 'checkout' ; _git_checkout  $argv
     case '*'        ; command git $SUBCOMMAND $argv
   end
 end
@@ -159,16 +159,16 @@ function _git_mergetool
   command git mergetool $argv
 end
 
-# function _git_checkout
-#   echo -e "branches\ntags\ngraph" | fzf --exit-0 --print-query --expect=ctrl-x,ctrl-f
-#
-#   switch "$result"
-#
-#   command git branch -a
-#   for remote in (command git remote)
-#     command git ls-remote --tags $remote
-#   end
-# end
+function _git_checkout
+  if [ (count $argv) -gt 0 ]
+    command git checkout $result $argv
+    return
+  end
+  _git_select_commit | read -l result
+  test -z "$result"; and return
+  test "$result" = '(none)'; and return
+  commandline "git checkout $result"
+end
 
 function _git_select_commit
   while true
