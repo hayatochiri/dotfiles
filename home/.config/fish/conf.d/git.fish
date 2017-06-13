@@ -189,3 +189,8 @@ function _git_select_branches
   echo $BRANCH
 end
 
+function _git_select_tags
+end
+
+function _git_select_graph
+end
