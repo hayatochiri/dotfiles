@@ -170,6 +170,17 @@ end
 #   end
 # end
 
+function _git_select_commit
+  while true
+    _git_select_branches | read -l SELECTED
+    test -n "$SELECTED"; and echo $SELECTED; and break
+    set SELECTED (_git_select_tags)
+    test -n "$SELECTED"; and echo $SELECTED; and break
+    set SELECTED (_git_select_graph)
+    test -n "$SELECTED"; and echo $SELECTED; and break
+  end
+end
+
 function _git_select_branches
   set -u result
   command git branch -a --color | grep -v 'HEAD' | fzf --ansi --tac --exit-0 --bind="$git_fzf_binds" --expect=ctrl-n | while read -l r
