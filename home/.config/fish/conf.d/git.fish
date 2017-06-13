@@ -2,10 +2,12 @@ set git_fzf_binds 'ctrl-v:page-down,ctrl-f:page-down,ctrl-b:page-up,ctrl-d:half-
 
 function gg-less
   git-foresta --branches --remotes --tags $argv | less -RSX
+  return 0
 end
 
 function gg
   git-foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+  return 0
 end
 
 function g
