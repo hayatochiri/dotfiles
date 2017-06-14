@@ -181,14 +181,14 @@ end
 
 function _git_select_branches
   set -u result
-  command git branch -a --color | grep -v 'HEAD' | string sub -s 3 | fzf --ansi --tac --exit-0 --bind="$git_fzf_binds" --preview="git show --color --pretty=fuller {}" --expect=ctrl-n | while read -l r
+  command git branch -a --color | grep -v 'HEAD' | string sub -s 3 | fzf --ansi --tac --exit-0 --bind="$git_fzf_binds" --preview="git show --color --pretty=fuller {}" --expect=ctrl-r | while read -l r
     set result $result $r
   end
   test -z "$result"; and echo '(none)'; and return
   set EXPECT $result[1]
   set BRANCH $result[2]
 
-  if [ "$EXPECT" = 'ctrl-n' ]
+  if [ "$EXPECT" = 'ctrl-r' ]
     return
   end
 
