@@ -201,5 +201,35 @@ end
 function _git_select_tags
 end
 
+function _git_show_refses
+  set COMMIT (command git rev-parse (echo $argv | awk '{print $1}'))
+  echo $COMMIT
+  command git show-ref | grep "$COMMIT" | sed -E "s/[0-9a-f]{40} refs\/(heads\/)?//"
+end
+
 function _git_select_graph
+  set -u result
+  git-foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
+    set result $result $r
+  end
+
+  test -z "$result"; and echo '(none)'; and return
+  set EXPECT $result[1]
+  set COMMIT (echo $result[2] | awk '{print $1}' | command grep -E '^[0-9a-f]+$')
+  test -z "$COMMIT"; and echo 'err' >&2; and echo '(none)'; and return
+
+  if [ "$EXPECT" = 'ctrl-r' ]
+    return
+  end
+
+  set -u result
+  _git_show_refses $COMMIT | fzf --bind="$git_fzf_binds"  --expect=ctrl-r --exit-0 --select-1 | while read -l r
+    set result $result $r
+  end
+  test -z "$result"; and echo '(none)'; and return
+  set EXPECT $result[1]
+  if [ "$EXPECT" = 'ctrl-r' ]
+    return
+  end
+  echo $result[2]
 end
