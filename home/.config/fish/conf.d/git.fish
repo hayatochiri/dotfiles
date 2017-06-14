@@ -172,11 +172,9 @@ end
 
 function _git_select_commit
   while true
-    _git_select_branches | read -l SELECTED
+    set -u SELECTED; _git_select_branches | read -l SELECTED
     test -n "$SELECTED"; and echo $SELECTED; and break
-    set SELECTED (_git_select_tags)
-    test -n "$SELECTED"; and echo $SELECTED; and break
-    set SELECTED (_git_select_graph)
+    set -u SELECTED; _git_select_graph | read -l SELECTED
     test -n "$SELECTED"; and echo $SELECTED; and break
   end
 end
