@@ -223,7 +223,7 @@ function _git_select_graph
   end
 
   set -u result
-  _git_show_refses $COMMIT | fzf --bind="$git_fzf_binds"  --expect=ctrl-r --exit-0 --select-1 | while read -l r
+  _git_show_refses $COMMIT | grep -Ev '/HEAD$' | fzf --bind="$git_fzf_binds"  --expect=ctrl-r --exit-0 --select-1 | while read -l r
     set result $result $r
   end
   test -z "$result"; and echo '(none)'; and return
