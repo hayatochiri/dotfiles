@@ -61,3 +61,11 @@ function _dirs
   find . -maxdepth 1 -type d 2>/dev/null | grep -v '^\.$'
   find / -maxdepth 1 -type d 2>/dev/null
 end
+
+function _lsl_color
+  if [ (uname) = 'Darwin' ]
+    gls -alpF --color=yes $argv
+  else
+    command ls --color -al $argv
+  end
+end
