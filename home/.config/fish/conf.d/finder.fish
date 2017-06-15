@@ -45,6 +45,23 @@ function cd
   end
 end
 
+function cdg
+  set PREFIX (command git rev-parse --show-prefix)
+  set TOPLEVEL (command git rev-parse --show-toplevel)
+  for i in (command git ls-files "$TOPLEVEL" --full-name)
+    dirname $i
+  end | uniq | fzf --query="$PREFIX" --preview="echo {}; echo; fish -c '_lsl_color '$TOPLEVEL/{}''" | read -l result
+  test -z "$result"; and return
+  cd "$TOPLEVEL/$result"
+end
+
+function cdgg
+  set TOPLEVEL (command git rev-parse --show-toplevel)
+  find "$TOPLEVEL" -name '.git' -prune -o -type d | string sub -s (string length "$TOPLEVEL++") | fzf --query=(pwd | string sub -s (string length "$TOPLEVEL++")) --preview="echo {}; echo; fish -c '_lsl_color '$TOPLEVEL/{}''" | read -l result
+  test -z "$result"; and return
+  cd "$TOPLEVEL/$result"
+end
+
 # unlimited cd
 function ucd
   set CURRENT_PATH (pwd)
