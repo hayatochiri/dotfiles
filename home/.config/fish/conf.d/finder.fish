@@ -52,7 +52,7 @@ end
 function cdg
   set PREFIX (command git rev-parse --show-prefix)
   set TOPLEVEL (command git rev-parse --show-toplevel)
-  command git ls-files "$TOPLEVEL" --full-name | fzf --query="$PREFIX" --preview="dirname $TOPLEVEL/{}; echo; fish -c '_lsl_color (dirname '$TOPLEVEL/{}')'" | read -l result
+  command git ls-files "$TOPLEVEL" --full-name | fzf --query="$PREFIX" --preview-window=top:50% --preview="dirname $TOPLEVEL/{}; echo; fish -c '_lsl_color (dirname '$TOPLEVEL/{}')'" | read -l result
   test -z "$result"; and return
   cd "$TOPLEVEL/$result"
 end
