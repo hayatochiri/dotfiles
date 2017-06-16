@@ -50,16 +50,18 @@ function cdgr
 end
 
 function cdg
+  set GLOBAL_COLUMNS (math $COLUMNS - 10)
   set PREFIX (command git rev-parse --show-prefix)
   set TOPLEVEL (command git rev-parse --show-toplevel)
-  command git ls-files "$TOPLEVEL" --full-name | fzf --query="$PREFIX" --preview-window=top:50% --preview="dirname $TOPLEVEL/{}; echo; fish -c '_lsl_color (dirname '$TOPLEVEL/{}')'" | read -l result
+  command git ls-files "$TOPLEVEL" --full-name | fzf --query="$PREFIX" --preview-window=top:50% --preview="dirname $TOPLEVEL/{}; echo; fish -c 'set -g GLOBAL_COLUMNS $GLOBAL_COLUMNS; _lsa_color (dirname '$TOPLEVEL/{}')'" | read -l result
   test -z "$result"; and return
-  cd "$TOPLEVEL/$result"
+  cd (dirname "$TOPLEVEL/$result")
 end
 
 function cdgg
+  set GLOBAL_COLUMNS (math $COLUMNS - 10)
   set TOPLEVEL (command git rev-parse --show-toplevel)
-  find "$TOPLEVEL" -name '.git' -prune -o -type d | string sub -s (string length "$TOPLEVEL++") | fzf --query=(pwd | string sub -s (string length "$TOPLEVEL++")) --preview="echo {}; echo; fish -c '_lsl_color '$TOPLEVEL/{}''" | read -l result
+  find "$TOPLEVEL" -name '.git' -prune -o -type d | string sub -s (string length "$TOPLEVEL++") | fzf --query=(pwd | string sub -s (string length "$TOPLEVEL++")) --preview-window=top:50% --preview="echo $TOPLEVEL/{}; echo; fish -c 'set -g GLOBAL_COLUMNS $GLOBAL_COLUMNS; _lsa_color '$TOPLEVEL/{}''" | read -l result
   test -z "$result"; and return
   cd "$TOPLEVEL/$result"
 end
@@ -81,10 +83,18 @@ function _dirs
   find / -maxdepth 1 -type d 2>/dev/null
 end
 
-function _lsl_color
+function _lsla_color
   if [ (uname) = 'Darwin' ]
     gls -alpF --color=yes $argv
   else
     command ls --color -al $argv
+  end
+end
+
+function _lsa_color
+  if [ (uname) = 'Darwin' ]
+    bash -c "COLUMNS=$GLOBAL_COLUMNS gls -apFC --color=yes $argv"
+  else
+    bash -c "COLUMNS=$GLOBAL_COLUMNS command ls --color -aC $argv"
   end
 end
