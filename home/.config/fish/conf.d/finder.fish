@@ -45,6 +45,10 @@ function cd
   end
 end
 
+function cdgr
+  cd (command git rev-parse --show-toplevel)
+end
+
 function cdg
   set PREFIX (command git rev-parse --show-prefix)
   set TOPLEVEL (command git rev-parse --show-toplevel)
