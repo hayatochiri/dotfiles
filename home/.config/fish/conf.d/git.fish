@@ -1,5 +1,12 @@
 set git_fzf_binds 'ctrl-v:page-down,ctrl-f:page-down,ctrl-b:page-up,ctrl-d:half-page-down,ctrl-u:half-page-up,alt-v:preview-page-down,alt-f:preview-page-down,alt-b:preview-page-up,alt-d:preview-page-down,alt-u:preview-page-up,alt-j:preview-down,alt-n:preview-down,alt-k:preview-up,alt-p:preview-up,alt-enter:toggle-preview'
 
+# set .gitconfig
+if [ (uname) = 'Darwin' ]
+  git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w"
+else
+  git config --global core.editor vim
+end
+
 function gg-less
   if [ (count $argv) = 0 ]
     git-foresta --branches --remotes --tags | less -RSX
