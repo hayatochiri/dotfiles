@@ -6,6 +6,7 @@ if [ (uname) = 'Darwin' ]
 else
   git config --global core.editor vim
 end
+git config --global rebase.autostash true
 
 function gg-less
   if [ (count $argv) = 0 ]
