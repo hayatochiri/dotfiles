@@ -7,4 +7,4 @@ else
   export GOPATH=$HOME/.go
 end
 
-set PATH $PATH /usr/local/go/bin $GOPATH/bin
+set PATH $PATH $GOPATH/bin
