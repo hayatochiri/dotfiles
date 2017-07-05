@@ -6,7 +6,7 @@ if [ (uname) = 'Darwin' ]
 
   function inote
     set -u result
-    find "$INOTE_PATH" -type f | string sub -s (string length "12$INOTE_PATH") | fzf --query="$argv" --multi --print-query --expect=ctrl-r,ctrl-y,ctrl-x,ctrl-i,ctrl-s,enter --header='Ctrl + i:new / r:remove / x:move / y:copy / s:search' | while read -l r
+    find "$INOTE_PATH" -type f | string sub -s (string length "12$INOTE_PATH") | fzf --preview="cat '$INOTE_PATH/{}'" --query="$argv" --multi --print-query --expect=ctrl-r,ctrl-y,ctrl-x,ctrl-i,ctrl-s,enter --header='Ctrl + i:new / r:remove / x:move / y:copy / s:search' | while read -l r
       set result $result $r
     end
 
