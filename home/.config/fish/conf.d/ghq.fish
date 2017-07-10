@@ -9,6 +9,8 @@ function ghq
     end
     builtin cd "$ghq_root_path/$result"
     ls
+  else if [ "$argv" = 'root' ]
+    cd $ghq_root_path
   else
     eval "command ghq $argv"
   end
