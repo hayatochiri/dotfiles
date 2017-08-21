@@ -42,8 +42,13 @@ function fish_prompt
 end
 
 function fish_right_prompt
+  set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
   set_color brblack
+
   [ -z "$CMD_DURATION" -o "$CMD_DURATION" -eq 0 ]; or echo -n "$CMD_DURATION ms < "
+  if [ "$IS_REPOSITORY" = 'true' ]
+    [ -z "$CMD_DURATION" -o "$CMD_DURATION" -eq 0 ]; or git config fish.status (_get_git_status)
+  end
   echo (date "+%c")
   set_color normal
 end
@@ -54,7 +59,7 @@ function _prompt_git
   builtin cd $CURRENT
   set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-  set STATUS (_get_git_status)
+  set STATUS (git config fish.status)
 
   echo -n (_git_highlight_path $TOPLEVEL)' > '
 
