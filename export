@@ -1,8 +1,5 @@
 #!/bin/sh
 
-rm ~/.gitconfig
-ln -s "`pwd`/home/.gitconfig" ~/.gitconfig
-
 mkdir -p ~/.config/fish/conf.d
 touch ~/.config/fish/config.fish
 

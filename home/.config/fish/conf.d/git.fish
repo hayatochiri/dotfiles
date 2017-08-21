@@ -1,12 +1,36 @@
 set git_fzf_binds 'ctrl-v:page-down,ctrl-f:page-down,ctrl-b:page-up,ctrl-d:half-page-down,ctrl-u:half-page-up,alt-v:preview-page-down,alt-f:preview-page-down,alt-b:preview-page-up,alt-d:preview-page-down,alt-u:preview-page-up,alt-j:preview-down,alt-n:preview-down,alt-k:preview-up,alt-p:preview-up,alt-enter:toggle-preview'
 
-# set .gitconfig
-if [ (uname) = 'Darwin' ]
-  git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w"
-else
-  git config --global core.editor vim
+function _git_config
+  if [ (uname) = 'Darwin' ]
+    # TODO: Sublime Text3で編集を確定できないバグの修正
+    # set CORE_EDITOR "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w"
+    set CORE_EDITOR vim
+  else
+    set CORE_EDITOR vim
+  end
+  git config --global core.editor $CORE_EDITOR
+  git config --global core.quotepath false
+  git config --global core.pager 'nkf -w | LESSCHARSET=utf-8 less'
+
+  git config --global ghq.root ~/src
+
+  git config --global color.ui true
+
+  git config --global color.diff.meta yellow
+
+  git config --global alias.cached 'diff --cached'
+
+  git config --global diff.tool subl2
+
+  git config --global difftool.subl2.cmd 'fish -c "subl2 $LOCAL $REMOTE"'
+
+  git config --global merge.tool subl3_merge
+
+  git config --global mergetool.subl3_merge.cmd 'fish -c "subl3_merge $REMOTE $BASE $LOCAL $MERGED"'
+
+  git config --global rebase.autostash true
 end
-git config --global rebase.autostash true
+_git_config
 
 function gg-less
   if [ (count $argv) = 0 ]

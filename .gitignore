@@ -1,6 +1,5 @@
 /home/*
 
-!/home/.gitconfig
 !/home/.tmux.conf
 !/home/.vimrc
 !/home/.zshrc
