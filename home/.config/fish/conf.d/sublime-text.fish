@@ -40,8 +40,9 @@ if [ (uname) = 'Darwin' ]
 else
   function s
     for f in $argv
-      set FULL_PATH (readlink -f $f | string replace -a '/' '-')
-      command rsub --name "$FULL_PATH" $f
+      set FULL_PATH (readlink -f $f | string sub -s 2 | string split '/' | tac | string join ' < ')
+      set BASENAME (basename $f)
+      command rsub --name "$FULL_PATH * $BASENAME" $f
     end
   end
 end
