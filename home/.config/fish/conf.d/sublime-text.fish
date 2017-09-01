@@ -37,4 +37,11 @@ if [ (uname) = 'Darwin' ]
     end
   end
   complete -c s -w less
+else
+  function s
+    for f in $argv
+      set FULL_PATH (readlink -f $f | string replace -a '/' '-')
+      command rsub --name "$FULL_PATH" $f
+    end
+  end
 end
