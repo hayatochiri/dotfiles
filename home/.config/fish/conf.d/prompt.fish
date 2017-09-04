@@ -68,6 +68,7 @@ function _prompt_git
     case 'clean'     ; set_color green
     case 'staging'   ; set_color yellow
     case 'unstaging' ; set_color red
+    case 'nfs'       ; set_color --bold brblack
   end
   echo -n $BRANCH
 
@@ -83,6 +84,12 @@ function _prompt_git
 end
 
 function _get_git_status
+  set IS_NFS (pwd | grep '/nfs/')
+  if [ -n "$IS_NFS" ]
+    echo 'nfs'
+    return
+  end
+
   set STATUS 'clean'
   command git status --porcelain | while read -l r
     set STAGING (string sub -s 1 -l 1 "$r")
