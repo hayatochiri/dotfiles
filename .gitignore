@@ -3,6 +3,7 @@
 !/home/.tmux.conf
 !/home/.vimrc
 !/home/.zshrc
+!/home/.lesskey
 
 !/home/.config
 /home/.config/*

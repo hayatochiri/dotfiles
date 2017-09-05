@@ -8,6 +8,11 @@ ls -1 home/.config/fish/conf.d/ | while read -r f; do
   ln -s "`pwd`/home/.config/fish/conf.d/$f" ~/.config/fish/conf.d/_$f
 done
 
+# less
+rm ~/.less
+ln -s "`pwd`/home/.lesskey" ~/.lesskey
+lesskey
+
 # fisherman
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 
