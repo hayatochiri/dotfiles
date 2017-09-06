@@ -10,7 +10,7 @@ function _git_config
   end
   git config --global core.editor $CORE_EDITOR
   git config --global core.quotepath false
-  git config --global core.pager 'nkf -w | LESSCHARSET=utf-8 LESS=-RS less'
+  git config --global core.pager 'nkf -w | LESSCHARSET=utf-8 LESS=-RSX less'
 
   git config --global ghq.root ~/src
 
