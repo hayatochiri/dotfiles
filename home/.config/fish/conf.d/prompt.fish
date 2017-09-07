@@ -55,8 +55,14 @@ function _prompt_git
   set PREFIX (string sub -s 2 (command git rev-parse --show-prefix | rev) | rev)
   set BRANCH (command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
   set STATUS (_get_git_status)
+  set STASHES_NUMBER (command git stash list | wc -l | string trim)
 
   echo -n (_git_highlight_path $TOPLEVEL)' > '
+
+  if [ "$STASHES_NUMBER" != '0' ]
+    set_color --bold brblack
+    echo -n "{$STASHES_NUMBER}"
+  end
 
   set_color normal
   switch $STATUS
