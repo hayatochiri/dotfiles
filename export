@@ -24,6 +24,6 @@ wget -O ~/.config/fish/conf.d/chtc.fish https://raw.githubusercontent.com/chriss
 
 # imgls, imgcat
 sudo wget -O /usr/local/bin/imgls https://raw.github.com/gnachman/iTerm2/master/tests/imgls
-chmod +x /usr/local/bin/imgls
+sudo chmod +x /usr/local/bin/imgls
 sudo wget -O /usr/local/bin/imgcat https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
-chmod +x /usr/local/bin/imgcat
+sudo chmod +x /usr/local/bin/imgcat
