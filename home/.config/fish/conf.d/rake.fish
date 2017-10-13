@@ -9,6 +9,7 @@ function rake
       return
     end
     set task (echo $result[2] | awk '{print $2;}')
+    echo "run rake $task"
     command rake $task
   else
     command rake $argv
