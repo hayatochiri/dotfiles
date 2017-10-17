@@ -27,3 +27,7 @@ sudo wget -O /usr/local/bin/imgls https://raw.github.com/gnachman/iTerm2/master/
 sudo chmod +x /usr/local/bin/imgls
 sudo wget -O /usr/local/bin/imgcat https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
 sudo chmod +x /usr/local/bin/imgcat
+
+# git-foresta
+sudo wget -O /usr/local/bin/git-foresta https://raw.githubusercontent.com/takaaki-kasai/git-foresta/master/git-foresta
+sudo chmod +x /usr/local/bin/git-foresta
