@@ -32,20 +32,24 @@ function _git_config
 end
 _git_config
 
+function foresta
+  git-foresta --graph-symbol-commit='o' --graph-symbol-merge='x' --graph-symbol-root='0' --graph-symbol-tip='@' $argv
+end
+
 function gg-less
   if [ (count $argv) = 0 ]
-    git-foresta --branches --remotes --tags | less -RSX
+    foresta --branches --remotes --tags | less -RSX
   else
-    git-foresta $argv | less -RSX
+    foresta $argv | less -RSX
   end
   return 0
 end
 
 function gg
   if [ (count $argv) = 0 ]
-    git-foresta --branches --remotes --tags | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
   else
-    git-foresta $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
   end
   return 0
 end
@@ -253,7 +257,7 @@ end
 
 function _git_select_graph
   set -u result
-  git-foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
+  foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
     set result $result $r
   end
 
