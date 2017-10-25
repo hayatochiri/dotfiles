@@ -80,7 +80,8 @@ function g
     return
   end
   set git_aliases (git config --list | grep 'alias\.' | sed 's/alias\.\([^=]*\)=\(.*\)/\1\     => \2/')
-  echo -e "$subcommands\n$git_aliases" | fzf --bind="$git_fzf_binds" --preview='git {1} --help' | awk '{print $1;}' | read -l result
+  set git_fish_functions "sublime-diff"
+  echo -e "$subcommands\n$git_aliases\n$git_fish_functions" | fzf --bind="$git_fzf_binds" --preview='git {1} --help' | awk '{print $1;}' | read -l result
   if [ -z "$result" ]
     return
   end
