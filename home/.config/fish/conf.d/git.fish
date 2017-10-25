@@ -91,16 +91,16 @@ function git
   set SUBCOMMAND $argv[1]
   set --erase argv[1]
   switch "$SUBCOMMAND"
-    case 'status'   ; _git_status    $argv
-    case 'add'      ; _git_add       $argv
-    case 'push'     ; _git_push      $argv
-    case 'fetch'    ; _git_fetch     $argv
-    case 'blame'    ; _git_blame     $argv
-    case 'difftool' ; _git_difftool  $argv
-    case 'mergetool'; _git_mergetool $argv
-    case 'checkout' ; _git_checkout  $argv
-    case '*'        ; command git $SUBCOMMAND $argv
+    case 'status'       ; _git_status       $argv
+    case 'add'          ; _git_add          $argv
+    case 'push'         ; _git_push         $argv
+    case 'fetch'        ; _git_fetch        $argv
+    case 'blame'        ; _git_blame        $argv
+    case 'difftool'     ; _git_difftool     $argv
+    case 'mergetool'    ; _git_mergetool    $argv
+    case 'checkout'     ; _git_checkout     $argv
     case 'sublime-diff' ; _git_sublime_diff $argv
+    case '*'            ; command git $SUBCOMMAND $argv
   end
 end
 
