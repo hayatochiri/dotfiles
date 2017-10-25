@@ -100,6 +100,7 @@ function git
     case 'mergetool'; _git_mergetool $argv
     case 'checkout' ; _git_checkout  $argv
     case '*'        ; command git $SUBCOMMAND $argv
+    case 'sublime-diff' ; _git_sublime_diff $argv
   end
 end
 
