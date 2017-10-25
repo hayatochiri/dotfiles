@@ -281,3 +281,10 @@ function _git_select_graph
   end
   echo $result[2]
 end
+
+function _git_sublime_diff
+  set GIT_TOPLEVEL (command git rev-parse --show-toplevel)
+  command git diff --name-only $argv | while read -l r
+    s "$GIT_TOPLEVEL/$r"
+  end
+end
