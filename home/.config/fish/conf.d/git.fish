@@ -47,9 +47,9 @@ end
 
 function gg
   if [ (count $argv) = 0 ]
-    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
   else
-    foresta $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
   end
   return 0
 end
@@ -259,7 +259,7 @@ end
 
 function _git_select_graph
   set -u result
-  foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='bash -c "[[ {1} =~ ^[0-9a-f]+$ ]] && git show --color --pretty=fuller {1}"' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
+  foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and git show --color --pretty=fuller {1}' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
     set result $result $r
   end
 
