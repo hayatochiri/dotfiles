@@ -47,9 +47,9 @@ end
 
 function gg
   if [ (count $argv) = 0 ]
-    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
   else
-    foresta $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
   end
   return 0
 end
@@ -81,7 +81,7 @@ function g
   end
   set git_aliases (git config --list | grep 'alias\.' | sed 's/alias\.\([^=]*\)=\(.*\)/\1\     => \2/')
   set git_fish_functions "sublime-diff"
-  echo -e "$subcommands\n$git_aliases\n$git_fish_functions" | fzf --bind="$git_fzf_binds" --preview='git {1} --help' | awk '{print $1;}' | read -l result
+  echo -e "$subcommands\n$git_aliases\n$git_fish_functions" | fzf --bind="$git_fzf_binds" --preview='command git {1} --help' | awk '{print $1;}' | read -l result
   if [ -z "$result" ]
     return
   end
@@ -145,7 +145,7 @@ end
 function _git_add
   while [ (_is_untracked_file_exist) = 'TRUE' ]
     set -u result
-    _git_status_colorize| fzf --exit-0 --ansi --bind="$git_fzf_binds" --expect=ctrl-c --preview='git diff --color {2..-1}' | string sub -s 4 | while read -l r
+    _git_status_colorize| fzf --exit-0 --ansi --bind="$git_fzf_binds" --expect=ctrl-c --preview='command git diff --color {2..-1}' | string sub -s 4 | while read -l r
       set result $result $r
     end
     test -z "$result"; and break
@@ -191,9 +191,9 @@ function _git_blame
   echo -e "$git_ls_files" | while read -l r
     echo -n (string length (echo $r | sed -e "s/[^\/]//g"))
     echo " $r"
-  end | sort -rn | awk '{print $2;}' | fzf --exit-0 --tac --query="$default_query" --bind="$git_fzf_binds" --no-sort --preview="git log -U3 --color $git_root_path{}" | read -l result
+  end | sort -rn | awk '{print $2;}' | fzf --exit-0 --tac --query="$default_query" --bind="$git_fzf_binds" --no-sort --preview="command git log -U3 --color $git_root_path{}" | read -l result
 
-  command git blame $argv "$git_root_path$result" | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="git show --color {1}" | awk '{print $1;}' | read -l result
+  command git blame $argv "$git_root_path$result" | fzf --reverse --exit-0 --bind="$git_fzf_binds" --no-sort --preview="command git show --color {1}" | awk '{print $1;}' | read -l result
   commandline "git show $result"
 end
 
@@ -231,7 +231,7 @@ end
 
 function _git_select_branches
   set -u result
-  command git branch -a --color | grep -v 'HEAD' | string sub -s 3 | fzf --ansi --tac --exit-0 --bind="$git_fzf_binds" --preview="git show --color --pretty=fuller {}" --expect=ctrl-r | while read -l r
+  command git branch -a --color | grep -v 'HEAD' | string sub -s 3 | fzf --ansi --tac --exit-0 --bind="$git_fzf_binds" --preview="command git show --color --pretty=fuller {}" --expect=ctrl-r | while read -l r
     set result $result $r
   end
   test -z "$result"; and echo '(none)'; and return
@@ -259,7 +259,7 @@ end
 
 function _git_select_graph
   set -u result
-  foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and git show --color --pretty=fuller {1}' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
+  foresta --branches --remotes --tags $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds"  --expect=ctrl-r | while read -l r
     set result $result $r
   end
 
