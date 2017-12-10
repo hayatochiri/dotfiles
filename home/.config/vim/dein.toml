@@ -3,3 +3,6 @@ repo = 'terryma/vim-multiple-cursors'
 
 [[plugins]]
 repo = 'severin-lemaignan/vim-minimap'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
