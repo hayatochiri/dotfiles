@@ -1,3 +1,16 @@
+" set title
+" set showmatch
+" set smartindent
+" set wrapscan
+" set laststatus=2
+" set statusline=%F%r%h%=
+" set nohlsearch
+" set noswapfile
+" set cindent
+" set tabstop=4
+" set shiftwidth=4
+" set expandtab
+
 set number
 set relativenumber
 set cursorline
