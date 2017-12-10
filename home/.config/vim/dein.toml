@@ -6,3 +6,6 @@ repo = 'severin-lemaignan/vim-minimap'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+
+[[plugins]] # テーマ: TomorrowNight
+repo = 'chriskempson/vim-tomorrow-theme'

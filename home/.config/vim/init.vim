@@ -71,3 +71,5 @@ if dein#check_install()
 endif
 
 syntax on
+
+colorscheme Tomorrow-night-bright
