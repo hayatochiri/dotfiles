@@ -14,6 +14,7 @@
 set number
 set relativenumber
 set cursorline
+highlight CursorLine cterm=NONE ctermbg=black
 
 " プラグインのhook配置用ディレクトリ
 set runtimepath+=~/.config/vim/autoload
