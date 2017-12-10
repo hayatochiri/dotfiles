@@ -1,5 +1,6 @@
 set number
 set relativenumber
+set cursorline
 
 " プラグインのhook配置用ディレクトリ
 set runtimepath+=~/.config/vim/autoload
@@ -49,3 +50,5 @@ endif
 if dein#check_install()
   call dein#install()
 endif
+
+syntax on
