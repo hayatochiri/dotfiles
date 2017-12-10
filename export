@@ -11,8 +11,9 @@ ls -1 home/.config/fish/conf.d/ | while read -r f; do
 done
 
 # vim
+rm ~/.config/vim
 ln -s "`pwd`/home/.config/vim" ~/.config/vim
-ln -s "`pwd`/home/.config/vim/init.vim" ~/.vimrc
+ln -s "~/.config/vim/init.vim" ~/.vimrc
 
 # less
 rm ~/.less
