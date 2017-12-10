@@ -19,6 +19,13 @@ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fishe
 # nvm
 fisher nvm
 
+# pyenv
+PYENV_VERSION=3.6.0
+git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+pyenv install $PYENV_VERSION
+pyenv rehash
+pyenv global $PYENV_VERSION
+
 # chtc
 wget -O ~/.config/fish/conf.d/chtc.fish https://raw.githubusercontent.com/chrisshiplet/fish-title/master/chtc.fish
 
