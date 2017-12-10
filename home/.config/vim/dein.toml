@@ -16,5 +16,8 @@ repo = 'itchyny/lightline.vim'
 [[plugins]] # 空白文字をハイライト
 repo = 'bronson/vim-trailing-whitespace'
 
+[[plugins]] # INSERTモード時にEmacsキーバインドを有効化
+repo = 'kentarosasaki/vim-emacs-bindings'
+
 [[plugins]] # 範囲コメントアウト
 repo = 'tomtom/tcomment_vim'
