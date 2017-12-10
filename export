@@ -13,7 +13,8 @@ done
 # vim
 rm ~/.config/vim
 ln -s "`pwd`/home/.config/vim" ~/.config/vim
-ln -s "~/.config/vim/init.vim" ~/.vimrc
+rm ~/.vimrc
+ln -s "`pwd`/home/.config/vim/init.vim" ~/.vimrc
 
 # less
 rm ~/.less
