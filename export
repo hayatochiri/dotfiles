@@ -1,5 +1,7 @@
 #!/bin/sh
 
+chsh -s `which fish`
+
 mkdir -p ~/.config/fish/conf.d
 touch ~/.config/fish/config.fish
 
