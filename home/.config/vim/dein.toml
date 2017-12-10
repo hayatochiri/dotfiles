@@ -12,3 +12,6 @@ repo = 'chriskempson/vim-tomorrow-theme'
 
 [[plugins]] # ステータス出力を拡張
 repo = 'itchyny/lightline.vim'
+
+[[plugins]] # 空白文字をハイライト
+repo = 'bronson/vim-trailing-whitespace'
