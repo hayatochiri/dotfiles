@@ -9,3 +9,6 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]] # テーマ: TomorrowNight
 repo = 'chriskempson/vim-tomorrow-theme'
+
+[[plugins]] # ステータス出力を拡張
+repo = 'itchyny/lightline.vim'
