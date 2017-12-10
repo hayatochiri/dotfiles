@@ -11,6 +11,8 @@
 " set shiftwidth=4
 " set expandtab
 
+let mapleader = "\<Space>"
+
 set number
 set relativenumber
 set cursorline
