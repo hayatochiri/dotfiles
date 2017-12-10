@@ -1,10 +1,10 @@
-[[plugins]]
+[[plugins]] # マルチカーソル
 repo = 'terryma/vim-multiple-cursors'
 
-[[plugins]]
+[[plugins]] # ミニマップ
 repo = 'severin-lemaignan/vim-minimap'
 
-[[plugins]]
+[[plugins]] # 行前にgit statusを表示
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]] # テーマ: TomorrowNight
