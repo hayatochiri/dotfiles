@@ -72,4 +72,4 @@ endif
 
 syntax on
 
-colorscheme Tomorrow-night-bright
+colorscheme Tomorrow-Night-Bright
