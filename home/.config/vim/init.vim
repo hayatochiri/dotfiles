@@ -46,6 +46,11 @@ let g:multi_cursor_quit_key='<Esc>'
 " vim-gitgutter
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
+" vim-syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_ruby_checkers = ['rubocop']
+
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)

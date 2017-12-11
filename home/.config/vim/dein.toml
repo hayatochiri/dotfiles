@@ -24,3 +24,6 @@ repo = 'tomtom/tcomment_vim'
 
 [[plugins]] # 選択範囲を移動
 repo = 't9md/vim-textmanip'
+
+[[plugins]] # Linter
+repo = 'vim-syntastic/syntastic'
