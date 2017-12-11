@@ -28,7 +28,7 @@ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fishe
 fisher nvm
 
 # pyenv
-PYENV_VERSION=3.6.0
+PYENV_VERSION=3.6.3
 git clone git://github.com/yyuu/pyenv.git ~/.pyenv
 pyenv install $PYENV_VERSION
 pyenv rehash
