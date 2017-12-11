@@ -2,7 +2,6 @@
 " set showmatch
 " set smartindent
 " set wrapscan
-" set laststatus=2
 " set statusline=%F%r%h%=
 " set nohlsearch
 " set noswapfile
@@ -15,6 +14,7 @@ let mapleader = "\<Space>"
 
 set number
 set relativenumber
+set laststatus=2
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=black
 
