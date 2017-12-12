@@ -1,20 +1,20 @@
 " set title
-" set showmatch
-" set smartindent
-" set wrapscan
 " set statusline=%F%r%h%=
 " set nohlsearch
-" set noswapfile
-" set cindent
-" set tabstop=4
-" set shiftwidth=4
-" set expandtab
 
 let mapleader = "\<Space>"
 
 set number
 set relativenumber
+set noswapfile
+set showmatch
 set laststatus=2
+set smartindent
+set cindent
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set wrapscan
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=black
 
