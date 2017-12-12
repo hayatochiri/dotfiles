@@ -27,3 +27,6 @@ repo = 't9md/vim-textmanip'
 
 [[plugins]] # Linter
 repo = 'w0rp/ale'
+
+[[plugins]] # インデントの可視化
+repo = 'Yggdroot/indentLine'

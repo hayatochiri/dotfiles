@@ -46,6 +46,9 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" indentLine
+let g:indentLine_char = '¦'
+
 " vim-gitgutter
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
