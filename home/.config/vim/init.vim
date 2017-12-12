@@ -18,6 +18,9 @@ set laststatus=2
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=black
 
+" <BS>が効かなくなる問題の対応
+set backspace=indent,eol,start
+
 " プラグインのhook配置用ディレクトリ
 set runtimepath+=~/.config/vim/autoload
 
