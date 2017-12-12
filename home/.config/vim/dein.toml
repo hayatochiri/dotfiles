@@ -26,4 +26,4 @@ repo = 'tomtom/tcomment_vim'
 repo = 't9md/vim-textmanip'
 
 [[plugins]] # Linter
-repo = 'vim-syntastic/syntastic'
+repo = 'w0rp/ale'
