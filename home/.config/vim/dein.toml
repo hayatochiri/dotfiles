@@ -1,9 +1,6 @@
 [[plugins]] # マルチカーソル
 repo = 'terryma/vim-multiple-cursors'
 
-[[plugins]] # ミニマップ
-repo = 'severin-lemaignan/vim-minimap'
-
 [[plugins]] # 行前にgit statusを表示
 repo = 'airblade/vim-gitgutter'
 
