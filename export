@@ -15,6 +15,8 @@ rm ~/.config/vim
 ln -s "`pwd`/home/.config/vim" ~/.config/vim
 rm ~/.vimrc
 ln -s "`pwd`/home/.config/vim/init.vim" ~/.vimrc
+rm -rf ~/.vim
+ln -s "`pwd`/home/.config/vim/filetype" ~/.vim
 
 # less
 rm ~/.less

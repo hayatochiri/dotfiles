@@ -3,6 +3,8 @@
 " set nohlsearch
 
 let mapleader = "\<Space>"
+filetype on
+filetype plugin indent on
 
 set encoding=utf-8
 set fileencoding=utf-8
