@@ -49,6 +49,12 @@ let g:indentLine_char = '¦'
 " vim-gitgutter
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
+" nerdtree
+autocmd vimenter * NERDTree
+
+" tagbar
+autocmd vimenter * TagbarOpen
+
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
