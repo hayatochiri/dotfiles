@@ -63,6 +63,11 @@ autocmd vimenter * NERDTree
 " tagbar
 autocmd vimenter * TagbarOpen
 
+" ale
+let g:ale_linters = {
+\  'eruby': [],
+\}
+
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
