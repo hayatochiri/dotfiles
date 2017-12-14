@@ -53,6 +53,7 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " indentLine
 let g:indentLine_char = '¦'
+set list listchars=tab:\>\ ,extends:»,precedes:«,nbsp:⍽
 
 " vim-gitgutter
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
