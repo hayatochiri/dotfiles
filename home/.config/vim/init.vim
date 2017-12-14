@@ -27,6 +27,8 @@ highlight CursorLine cterm=NONE ctermbg=black
 " <BS>が効かなくなる問題の対応
 set backspace=indent,eol,start
 
+nmap <C-c> <ESC>
+
 " プラグインのhook配置用ディレクトリ
 set runtimepath+=~/.config/vim/autoload
 
