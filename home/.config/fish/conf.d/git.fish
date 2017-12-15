@@ -29,6 +29,10 @@ function _git_config
   git config --global mergetool.subl3_merge.cmd 'fish -c "subl3_merge $REMOTE $BASE $LOCAL $MERGED"'
 
   git config --global rebase.autostash true
+
+  git config --global pager.log 'diff-highlight | less'
+  git config --global pager.show 'diff-highlight | less'
+  git config --global pager.diff 'diff-highlight | less'
 end
 _git_config
 
@@ -47,9 +51,9 @@ end
 
 function gg
   if [ (count $argv) = 0 ]
-    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | diff-highlight | less -RSX)"
   else
-    foresta $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | less -RSX)"
+    foresta $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | diff-highlight | less -RSX)"
   end
   return 0
 end
