@@ -39,3 +39,6 @@ repo = 'Shougo/neocomplete.vim'
 
 [[plugins]] # go言語開発
 repo = 'fatih/vim-go'
+
+[[plugins]] # fzf
+repo = 'junegunn/fzf.vim'

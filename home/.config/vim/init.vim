@@ -69,6 +69,10 @@ let g:ale_linters = {
 " neocomplete.vim
 let g:neocomplete#enable_at_startup = 1
 
+" fzf
+set runtimepath+=/usr/local/opt/fzf
+set runtimepath+=~/.fzf
+
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
