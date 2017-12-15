@@ -36,3 +36,6 @@ repo = 'kien/ctrlp.vim'
 
 [[plugins]] # オートコンプリート
 repo = 'Shougo/neocomplete.vim'
+
+[[plugins]] # go言語開発
+repo = 'fatih/vim-go'
