@@ -33,3 +33,6 @@ repo = 'scrooloose/nerdtree'
 
 [[plugins]] # 画面右にタグバーを表示
 repo = 'majutsushi/tagbar'
+
+[[plugins]] # ハイライトを綺麗にする
+repo = 'tomasr/molokai'

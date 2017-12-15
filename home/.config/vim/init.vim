@@ -69,6 +69,9 @@ let g:ale_linters = {
 \  'eruby': [],
 \}
 
+" morokai
+let g:molokai_original = 1
+
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
