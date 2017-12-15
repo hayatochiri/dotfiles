@@ -19,7 +19,7 @@ repo = 'kentarosasaki/vim-emacs-bindings'
 [[plugins]] # 範囲コメントアウト
 repo = 'tomtom/tcomment_vim'
 
-[[plugins]] # 選択範囲を移動
+[[plugins]] # 選択範囲を移動(キーバインド未設定)
 repo = 't9md/vim-textmanip'
 
 [[plugins]] # Linter
