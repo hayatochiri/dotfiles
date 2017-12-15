@@ -58,9 +58,6 @@ set list listchars=tab:\>\ ,extends:»,precedes:«,nbsp:⍽
 " vim-gitgutter
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
-" nerdtree
-autocmd vimenter * NERDTree
-
 " tagbar
 autocmd vimenter * TagbarOpen
 

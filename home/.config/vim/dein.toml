@@ -28,9 +28,6 @@ repo = 'w0rp/ale'
 [[plugins]] # インデントの可視化
 repo = 'Yggdroot/indentLine'
 
-[[plugins]] # 画面左にファイルツリーを表示
-repo = 'scrooloose/nerdtree'
-
 [[plugins]] # 画面右にタグバーを表示
 repo = 'majutsushi/tagbar'
 
