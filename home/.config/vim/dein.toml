@@ -36,3 +36,6 @@ repo = 'majutsushi/tagbar'
 
 [[plugins]] # FuzzyFinder
 repo = 'kien/ctrlp.vim'
+
+[[plugins]] # オートコンプリート
+repo = 'Shougo/neocomplete.vim'

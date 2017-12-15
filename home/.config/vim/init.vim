@@ -69,6 +69,8 @@ let g:ale_linters = {
 \  'eruby': [],
 \}
 
+" neocomplete.vim
+let g:neocomplete#enable_at_startup = 1
 
 " 設定開始
 if dein#load_state(s:dein_dir)
