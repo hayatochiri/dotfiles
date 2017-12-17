@@ -3,3 +3,8 @@ alias lsa='ls -a'
 alias lsal='ls -al'
 alias lsla='ls -al'
 
+alias gs='git status'
+alias gd='git diff'
+alias gc='git checkout'
+alias gdc='git diff --cached'
+alias grb='git rebase'
