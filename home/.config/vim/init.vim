@@ -25,6 +25,9 @@ set nowrap
 set belloff=all
 highlight CursorLine cterm=NONE ctermbg=black
 
+" タブページを常に表示
+set showtabline=2
+
 " <BS>が効かなくなる問題の対応
 set backspace=indent,eol,start
 
