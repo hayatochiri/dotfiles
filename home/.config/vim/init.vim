@@ -34,6 +34,24 @@ set backspace=indent,eol,start
 " Ctrl-cをEscとして動作させる
 nmap <C-c> <ESC>
 
+" バッファ、タブ操作
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sH <C-w>H
+nnoremap st :<C-u>tabnew<CR>
+nnoremap sn gt
+nnoremap sp gT
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
+nnoremap sq :<C-u>q<CR>
+nnoremap sQ :<C-u>bd<CR>
+
 " プラグインのhook配置用ディレクトリ
 set runtimepath+=~/.config/vim/autoload
 
