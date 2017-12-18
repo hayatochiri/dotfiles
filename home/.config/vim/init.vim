@@ -31,6 +31,7 @@ set showtabline=2
 " <BS>が効かなくなる問題の対応
 set backspace=indent,eol,start
 
+" Ctrl-cをEscとして動作させる
 nmap <C-c> <ESC>
 
 " プラグインのhook配置用ディレクトリ
