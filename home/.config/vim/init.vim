@@ -96,6 +96,9 @@ let g:neocomplete#enable_at_startup = 1
 set runtimepath+=/usr/local/opt/fzf
 set runtimepath+=~/.fzf
 
+" previm
+let g:previm_open_cmd='open -a Google\ Chrome'
+
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)

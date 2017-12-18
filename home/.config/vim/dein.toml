@@ -42,3 +42,6 @@ repo = 'fatih/vim-go'
 
 [[plugins]] # fzf
 repo = 'junegunn/fzf.vim'
+
+[[plugins]] # Markdown Previewer
+repo = 'kannokanno/previm'
