@@ -48,3 +48,9 @@ sudo chmod +x /usr/local/bin/imgcat
 # git-foresta
 sudo wget -O /usr/local/bin/git-foresta https://raw.githubusercontent.com/takaaki-kasai/git-foresta/master/git-foresta
 sudo chmod +x /usr/local/bin/git-foresta
+
+if [ "`uname`" = "Darwin" ]; then
+  rm ~/Library/LaunchAgents/org.golang.godoc.plist
+  ln -s "`pwd`/home/Library/LaunchAgents/org.golang.godoc.plist" ~/Library/LaunchAgents/org.golang.godoc.plist
+  launchctl load ~/Library/LaunchAgents/org.golang.godoc.plist
+fi
