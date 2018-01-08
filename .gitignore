@@ -5,6 +5,10 @@
 !/home/.zshrc
 !/home/.lesskey
 
+!/home/Library
+!/home/Library/LaunchAgents
+!/home/Library/LaunchAgents/org.golang.godoc.plist
+
 !/home/.config
 /home/.config/*
 !/home/.config/vim
