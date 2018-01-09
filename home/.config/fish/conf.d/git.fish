@@ -12,7 +12,7 @@ function _git_config
   git config --global core.quotepath false
   git config --global core.pager 'nkf -w | LESSCHARSET=utf-8 LESS=-RSX less'
 
-  git config --global ghq.root ~/src
+  git config --global ghq.root ~/.ghq/src
 
   git config --global color.ui true
 
