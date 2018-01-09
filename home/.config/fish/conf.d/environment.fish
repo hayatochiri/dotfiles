@@ -3,8 +3,8 @@ if [ -e /etc/DOTFILES_EMULATOR ]
   set GOPATH /.go; and mkdir -p $GOPATH
   export GOPATH=/.go
 else
-  set GOPATH ~/.go; and mkdir -p $GOPATH
-  export GOPATH=$HOME/.go
+  set GOPATH ~/.ghq; and mkdir -p $GOPATH
+  export GOPATH=$HOME/.ghq
 end
 
 set PATH $PATH $GOPATH/bin
