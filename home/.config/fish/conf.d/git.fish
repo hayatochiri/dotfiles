@@ -112,6 +112,9 @@ function git
 end
 
 function _git_status
+  command git status $argv -su | string replace -r '^.. ' '' | xargs -I /// dirname '///' | sort | uniq | while read -l r
+    _rm_osx_hidden_files $r
+  end
   command git status $argv -su
 end
 
