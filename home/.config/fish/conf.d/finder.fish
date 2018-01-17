@@ -98,3 +98,23 @@ function _lsa_color
     bash -c "COLUMNS=$GLOBAL_COLUMNS command ls --color -aC $argv"
   end
 end
+
+function _rm_osx_hidden_files
+  if [ -d "$argv" ]
+    set TARGET_DIRECTORY $argv
+  else if [ -f "$argv" ]
+    set TARGET_DIRECTORY (dirname $argv)
+  else
+    return
+  end
+
+  set TARGET_DIRECTORY (string replace -r '/$' '' "$TARGET_DIRECTORY")
+
+  command ls -a1 "$TARGET_DIRECTORY" | command grep -E '\._.+?$' | while read -l HIDDEN_FILE
+    set BASE_FILE (string replace -r '^\._' '' "$HIDDEN_FILE")
+    if [ -f "$TARGET_DIRECTORY/$BASE_FILE" ]
+      echo "[_rm_osx_hidden_files]rm $TARGET_DIRECTORY/$HIDDEN_FILE" 1>&2
+      rm -f "$TARGET_DIRECTORY/$HIDDEN_FILE"
+    end
+  end
+end
