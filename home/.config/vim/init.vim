@@ -13,6 +13,7 @@ set number
 set relativenumber
 set noswapfile
 set showmatch
+set textwidth=0
 set laststatus=2
 set smartindent
 set cindent
