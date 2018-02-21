@@ -51,9 +51,9 @@ end
 
 function gg
   if [ (count $argv) = 0 ]
-    foresta --branches --remotes --tags | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | diff-highlight | less -RSX)"
+    foresta --branches --remotes --tags | fzf --ansi --reverse --no-sort --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | diff-highlight | less -RSX)"
   else
-    foresta $argv | fzf --ansi --reverse --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | diff-highlight | less -RSX)"
+    foresta $argv | fzf --ansi --reverse --no-sort --preview='test -n (echo {1} | grep -E "^[0-9a-f]+\$"); and command git show --color --pretty=fuller {1}' --bind="$git_fzf_binds,enter:execute(git show --color --pretty=fuller {1} | diff-highlight | less -RSX)"
   end
   return 0
 end
