@@ -11,6 +11,7 @@ function _git_config
   git config --global core.editor $CORE_EDITOR
   git config --global core.quotepath false
   git config --global core.pager 'nkf -w | LESSCHARSET=utf-8 LESS=-RSX less'
+  git config --global core.excludesfile ~/.gitignore_global
 
   git config --global ghq.root ~/.ghq/src
 
