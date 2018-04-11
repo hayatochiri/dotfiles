@@ -3,8 +3,7 @@ set git_fzf_binds 'ctrl-v:page-down,ctrl-f:page-down,ctrl-b:page-up,ctrl-d:half-
 function _git_config
   if [ (uname) = 'Darwin' ]
     # TODO: Sublime Text3で編集を確定できないバグの修正
-    # set CORE_EDITOR "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w"
-    set CORE_EDITOR vim
+    set CORE_EDITOR "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w"
   else
     set CORE_EDITOR vim
   end
