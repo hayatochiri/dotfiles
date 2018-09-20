@@ -4,3 +4,6 @@
 
 # Rubocop
 .rubocop_diff/
+
+# CTags
+.tags
