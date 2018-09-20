@@ -113,6 +113,17 @@ function git
     case 'sublime-diff' ; _git_sublime_diff $argv
     case '*'            ; command git $SUBCOMMAND $argv
   end
+
+  switch "$SUBCOMMAND"
+    case 'stash'       ; ctags
+    case 'reset'       ; ctags
+    case 'merge'       ; ctags
+    case 'rebase'      ; ctags
+    case 'checkout'    ; ctags
+    case 'fetch'       ; ctags
+    case 'cherry-pick' ; ctags
+    case 'am'          ; ctags
+  end
 end
 
 function _git_status
