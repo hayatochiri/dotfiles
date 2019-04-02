@@ -136,7 +136,7 @@ function _git_status
 end
 
 function _git_status_colorize
-  git status -su | while read -l r
+  git status -su $argv | while read -l r
     set STAGING (string sub -s 1 -l 1 "$r")
     set UNSTAGING (string sub -s 2 -l 1 "$r")
     set TARGET_FILE (string sub -s 3 "$r")
@@ -171,7 +171,7 @@ end
 function _git_add
   while [ (_is_untracked_file_exist) = 'TRUE' ]
     set -u result
-    _git_status_colorize| fzf --exit-0 --ansi --bind="$git_fzf_binds" --expect=ctrl-c --preview='command git diff --color {2..-1}' | string sub -s 4 | while read -l r
+    _git_status_colorize $argv| fzf --exit-0 --ansi --bind="$git_fzf_binds" --expect=ctrl-c --preview='command git diff --color {2..-1}' | string sub -s 4 | while read -l r
       set result $result $r
     end
     test -z "$result"; and break
