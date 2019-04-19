@@ -1,0 +1,13 @@
+[debian9]
+
+#[ipaddress] ansible_ssh_user=[user]
+#localhost ansible_connection=local
+
+[darwin]
+
+#[ipaddress] ansible_ssh_user=[user]
+#localhost ansible_connection=local
+
+[all:vars]
+
+git_version="2.21.0"

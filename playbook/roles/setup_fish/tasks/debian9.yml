@@ -1,0 +1,45 @@
+---
+
+# fish shellのインストール
+
+- name: fish shellリポジトリのGPG Keyを追加
+  become: yes
+  apt_key:
+    url: 'https://download.opensuse.org/repositories/shells:fish:release:3/Debian_9.0/Release.key'
+    state: present
+
+- name: fish shellリポジトリを追加
+  become: yes
+  apt_repository:
+    repo: 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_9.0/ /'
+    state: present
+
+- name: fish shellをインストール
+  become: yes
+  apt:
+    name: '{{ packages }}'
+    state: present
+    update_cache: yes
+    cache_valid_time: 3000
+  vars:
+    packages:
+      - fish
+
+# fish shell設定ファイルの展開
+
+- name: fish shell関連のディレクトリを作成
+  file:
+    state: directory
+    path: "{{ item }}"
+    recurse: yes
+  with_items:
+    - '{{ ansible_env.HOME }}/.config/fish'
+    - '{{ ansible_env.HOME }}/.config/fish/conf.d'
+
+- name: fish shell設定ファイルを展開
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+    - { src: 'fish_variables', dest: '{{ ansible_env.HOME }}/.config/fish/fish_variables' }
+    - { src: 'conf.d/', dest: '{{ ansible_env.HOME }}/.config/fish/conf.d/' }

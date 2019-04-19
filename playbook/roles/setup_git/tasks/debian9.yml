@@ -1,0 +1,81 @@
+---
+
+- name: パッケージインストールされたgitを削除
+  become: yes
+  apt:
+    name: git
+    state: absent
+
+- name: インストール済みgitバージョンを確認
+  command: git --version
+  register: installed_git_version
+  ignore_errors: yes
+  changed_when: no
+
+- name: gitの依存パッケージをインストール
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3000
+  vars:
+    packages:
+      - gettext
+      - libcurl4-openssl-dev
+      - libexpat1-dev
+      - libssl-dev
+      - libz-dev
+      - zlib1g-dev
+
+- name: gitビルド用ディレクトリを作成
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  file:
+    state: directory
+    path: "{{ item }}"
+    recurse: yes
+  with_items:
+    - "/var/cache/repo"
+    - "/var/cache/repo/git"
+
+- name: gitソースをダウンロード
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  get_url:
+    url: "https://github.com/git/git/archive/v{{ git_version }}.tar.gz"
+    dest: /var/cache/repo/git
+  register: result
+
+- name: gitソースを展開
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  unarchive:
+    src: "{{ result.dest }}"
+    remote_src: yes
+    dest: "/var/cache/repo/git"
+
+- name: gitソースをビルド
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  command: make all
+  args:
+    chdir: "/var/cache/repo/git/{{ result.dest | basename | regex_replace('.tar.gz', '') }}"
+
+- name: gitをインストール
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  command: make prefix=/usr/local install
+  args:
+    chdir: "/var/cache/repo/git/{{ result.dest | basename | regex_replace('.tar.gz', '') }}"
+
+- name: gitソースを削除
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - "{{ result.dest }}"
+    - "/var/cache/repo/git/{{ result.dest | basename | regex_replace('.tar.gz', '') }}"
