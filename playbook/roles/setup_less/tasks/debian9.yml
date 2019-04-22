@@ -1,0 +1,8 @@
+---
+
+- name: less設定ファイルを展開
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: ".lesskey", dest: "{{ ansible_env.HOME }}/.lesskey" }

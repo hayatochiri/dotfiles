@@ -1,0 +1,47 @@
+[[plugins]] # マルチカーソル
+repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]] # 行前にgit statusを表示
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]] # テーマ: TomorrowNight
+repo = 'chriskempson/vim-tomorrow-theme'
+
+[[plugins]] # ステータス出力を拡張
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # 空白文字をハイライト
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # INSERTモード時にEmacsキーバインドを有効化
+repo = 'kentarosasaki/vim-emacs-bindings'
+
+[[plugins]] # 範囲コメントアウト
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]] # 選択範囲を移動(キーバインド未設定)
+repo = 't9md/vim-textmanip'
+
+[[plugins]] # Linter
+repo = 'w0rp/ale'
+
+[[plugins]] # インデントの可視化
+repo = 'Yggdroot/indentLine'
+
+[[plugins]] # 画面右にタグバーを表示
+repo = 'majutsushi/tagbar'
+
+[[plugins]] # FuzzyFinder
+repo = 'kien/ctrlp.vim'
+
+[[plugins]] # オートコンプリート
+repo = 'Shougo/neocomplete.vim'
+
+[[plugins]] # go言語開発
+repo = 'fatih/vim-go'
+
+[[plugins]] # fzf
+repo = 'junegunn/fzf.vim'
+
+[[plugins]] # Markdown Previewer
+repo = 'kannokanno/previm'

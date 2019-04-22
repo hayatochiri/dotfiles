@@ -3,13 +3,14 @@
 - name: Debianにdotfilesを展開
   hosts: debian9
   roles:
-    - setup_fish
     - setup_git
     - setup_fzf
+    - setup_vim
+    - setup_less
+    - setup_pyenv
+    - setup_golang
 
-  # setup_vim
-  # setup_less
-  # setup_nvm
-  # setup_pyenv
-  # setup_goenv
-    # setup_ghq
+    - setup_fish
+
+    # - setup_rubyenv
+    # - setup_nvm

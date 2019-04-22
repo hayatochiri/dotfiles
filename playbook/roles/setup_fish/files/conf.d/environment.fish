@@ -7,4 +7,4 @@ else
   export GOPATH=$HOME/.ghq
 end
 
-set PATH $PATH $GOPATH/bin
+set PATH $PATH $GOPATH/bin /usr/local/go/bin

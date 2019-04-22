@@ -35,6 +35,7 @@
   with_items:
     - '{{ ansible_env.HOME }}/.config/fish'
     - '{{ ansible_env.HOME }}/.config/fish/conf.d'
+    - '{{ ansible_env.HOME }}/.config/fish/functions'
 
 - name: fish shell設定ファイルを展開
   copy:
@@ -43,3 +44,25 @@
   with_items:
     - { src: 'fish_variables', dest: '{{ ansible_env.HOME }}/.config/fish/fish_variables' }
     - { src: 'conf.d/', dest: '{{ ansible_env.HOME }}/.config/fish/conf.d/' }
+
+# fishermanのインストール
+
+- name: fishermanをインストール
+  get_url:
+    url: "https://git.io/fisher"
+    dest: '{{ ansible_env.HOME }}/.config/fish/functions/fisher.fish'
+
+- name: fishermanプラグインのインストール
+  shell: "fish -c 'fisher add {{ item }}'"
+  with_items:
+    - nvm
+
+- name: fishの絶対パスを取得
+  command: which fish
+  register: fish_path
+
+- name: デフォルトシェルをfishに変更
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: "{{ fish_path.stdout }}"
