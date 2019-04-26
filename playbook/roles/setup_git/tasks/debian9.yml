@@ -72,6 +72,22 @@
   args:
     chdir: "/var/cache/repo/git/{{ result.dest | basename | regex_replace('.tar.gz', '') }}"
 
+- name: git diff-highlightをビルド
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  command: make
+  args:
+    chdir: "/var/cache/repo/git/{{ result.dest | basename | regex_replace('.tar.gz', '') }}/contrib/diff-highlight"
+
+- name: git diff-highlightを展開
+  when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
+  become: yes
+  copy:
+    src: "/var/cache/repo/git/{{ result.dest | basename | regex_replace('.tar.gz', '') }}/contrib/diff-highlight/diff-highlight"
+    dest: /usr/local/bin/diff-highlight
+    remote_src: yes
+    mode: "0755"
+
 - name: gitソースを削除
   when: "(installed_git_version is failed) or (installed_git_version.stdout != 'git version ' + git_version)"
   become: yes
