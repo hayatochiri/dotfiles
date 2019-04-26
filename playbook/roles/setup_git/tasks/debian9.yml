@@ -1,5 +1,7 @@
 ---
 
+# gitのインストール
+
 - name: パッケージインストールされたgitを削除
   become: yes
   apt:
@@ -86,3 +88,5 @@
     dest: "{{ item.dest }}"
   with_items:
     - { src: ".gitignore_global", dest: "{{ ansible_env.HOME }}/.gitignore_global" }
+
+# TODO: git-forestaのインストール
