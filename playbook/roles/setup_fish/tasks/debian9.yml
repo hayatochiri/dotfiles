@@ -25,6 +25,17 @@
     packages:
       - fish
 
+- name: fish shellの設定ファイルに必要なパッケージをインストール
+  become: yes
+  apt:
+    name: '{{ packages }}'
+    state: present
+    update_cache: yes
+    cache_valid_time: 3000
+  vars:
+    packages:
+      - exuberant-ctags
+
 # fish shell設定ファイルの展開
 
 - name: fish shell関連のディレクトリを作成
