@@ -1,11 +1,11 @@
 [debian9]
 
-#[ipaddress] ansible_ssh_user=[user]
+#[ipaddress][:port] ansible_ssh_user=[user] ansible_ssh_private_key_file=[path_to_private_key]
 #localhost ansible_connection=local
 
 [darwin]
 
-#[ipaddress] ansible_ssh_user=[user]
+#[ipaddress][:port] ansible_ssh_user=[user] ansible_ssh_private_key_file=[path_to_private_key]
 #localhost ansible_connection=local
 
 [all:vars]
