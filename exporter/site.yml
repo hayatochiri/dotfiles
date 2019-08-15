@@ -5,3 +5,5 @@
   tasks:
     - group_by:
         key: os_{{ ansible_facts['distribution'] }}_{{ ansible_facts['distribution_major_version'] }}
+
+- import_playbook: debian.yml
