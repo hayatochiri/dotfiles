@@ -1,5 +1,37 @@
 ---
 
+homebrew_taps:
+  - homebrew/cask-fonts
+  - homebrew/core
+homebrew_installed_packages:
+  - ansible
+  - coreutils
+  - docker
+  - fish
+  - fzf
+  - ghq
+  - git
+  - mas
+  - pyenv
+homebrew_uninstalled_packages: []
+homebrew_upgrade_all_packages: no
+homebrew_cask_apps:
+  - 1password
+  - alfred
+  - apache-directory-studio
+  - docker
+  - font-ricty-diminished
+  - google-chrome
+  - hyperswitch
+  - iterm2
+  - karabiner-elements
+  - keycast
+  - kindle
+  - spectacle
+  - sublime-text
+  - wireshark
+homebrew_cask_uninstalled_apps: []
+
 presented_osx_defaults:
   # 一般
   - { name: ダークモードを有効, key: AppleInterfaceStyle, type: string, value: Dark }
