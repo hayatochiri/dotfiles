@@ -1,0 +1,7 @@
+---
+
+- name: iCloud Driveへのリンクを作成
+  file:
+    state: link
+    path: '{{ ansible_facts.user_dir }}/iCloudDrive'
+    src: '{{ ansible_facts.user_dir }}/Library/Mobile Documents/com~apple~CloudDocs'
