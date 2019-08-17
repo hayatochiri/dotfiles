@@ -1,0 +1,13 @@
+---
+
+- name: サービスを再起動
+  command: '{{ item }}'
+  with_items:
+    - killall Dock
+    - killall Finder
+
+- name: Dockを再起動
+  command: killall Dock
+
+- name: Finderを再起動
+  command: killall Finder
