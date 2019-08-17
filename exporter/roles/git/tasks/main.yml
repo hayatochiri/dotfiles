@@ -1,0 +1,13 @@
+---
+
+- name: diff-highlightをパスの通った場所に配置
+  file:
+    state: link
+    path: /usr/local/bin/diff-highlight
+    src: /usr/local/share/git-core/contrib/diff-highlight/diff-highlight
+
+- name: git-forestaを配置
+  get_url:
+    url: https://raw.githubusercontent.com/takaaki-kasai/git-foresta/master/git-foresta
+    dest: /usr/local/bin/git-foresta
+    mode: 0777
