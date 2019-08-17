@@ -1,0 +1,22 @@
+---
+
+- name: Karabiner-Elements用ディレクトリを作成
+  file:
+    state: directory
+    path: '{{ item }}'
+    recurse: yes
+  with_items:
+    - '{{ ansible_facts.user_dir }}/.config'
+
+- name: Karabiner-Elementsの設定ディレクトリを配置
+  file:
+    state: link
+    path: '{{ ansible_facts.user_dir }}/.config/karabiner'
+    src: '{{ ansible_facts.user_dir }}/Library/Mobile Documents/com~apple~CloudDocs/Environment/Karabiner-Elements'
+    force: yes
+
+- name: iCloud Driveへのリンクを作成
+  file:
+    state: link
+    path: '{{ ansible_facts.user_dir }}/iCloudDrive'
+    src: '{{ ansible_facts.user_dir }}/Library/Mobile Documents/com~apple~CloudDocs'
