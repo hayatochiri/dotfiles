@@ -1,0 +1,36 @@
+---
+
+- name: fish-shell用ディレクトリを作成
+  file:
+    state: directory
+    path: '{{ item }}'
+    recurse: yes
+  with_items:
+    - '{{ ansible_facts.user_dir }}/.config'
+    - '{{ ansible_facts.user_dir }}/.config/fish'
+    - '{{ ansible_facts.user_dir }}/.config/fish/conf.d'
+
+- name: fish-shell用基本設定ファイルを配置
+  file:
+    state: link
+    path: '{{ ansible_facts.user_dir }}/.config/fish/fish_variables'
+    src: '{{ dotfiles_fish_path }}/config/fish_variables'
+
+- name: 展開するfish-shell設定ファイルのリストを取得
+  find:
+    file_type: file
+    paths: '{{ dotfiles_fish_path }}/config/conf.d'
+  register: get_dotfiles_task
+
+- name: fish-shell詳細設定ファイルを配置
+  file:
+    state: link
+    path: '{{ ansible_facts.user_dir }}/.config/fish/conf.d/{{ item | basename }}'
+    src: '{{ item }}'
+    force: yes
+  with_items: '{{ get_dotfiles_task.files | map(attribute="path") | list }}'
+
+- name: ユーザーシェルをfish-shellに変更
+  command: chsh -s /usr/local/bin/fish {{ ansible_facts.user_id }}
+  become: yes
+  when: ansible_facts.user_shell != '/usr/local/bin/fish'
