@@ -1,0 +1,23 @@
+---
+
+- name: Sublime Text 3リポジトリをclone
+  block:
+    - name: Sublime Text 3リポジトリをsshで取得
+      git:
+        repo: '{{ sublime_text_3_git_repository }}'
+        dest: '{{ sublime_text_3_clone_path }}'
+        version: '{{ sublime_text_3_deploy_revision }}'
+        force: yes
+  rescue:
+    - name: Sublime Text 3リポジトリをhttpsで取得
+      git:
+        repo: '{{ sublime_text_3_https_repository }}'
+        dest: '{{ sublime_text_3_clone_path }}'
+        version: '{{ sublime_text_3_deploy_revision }}'
+        force: yes
+
+- name: Sublime Text 3設定ディレクトリを配置
+  file:
+    state: link
+    path: '{{ sublime_text_3_deploy_path }}'
+    src: '{{ sublime_text_3_clone_path }}'
