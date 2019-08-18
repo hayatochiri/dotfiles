@@ -20,6 +20,7 @@ homebrew_cask_apps:
   - alfred
   - apache-directory-studio
   - docker
+  - bettertouchtool
   - font-ricty-diminished
   - google-chrome
   - hyperswitch
