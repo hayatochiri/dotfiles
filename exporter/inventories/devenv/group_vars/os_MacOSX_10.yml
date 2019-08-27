@@ -11,6 +11,7 @@ homebrew_installed_packages:
   - fzf
   - ghq
   - git
+  - go
   - mas
   - pyenv
 homebrew_uninstalled_packages: []
