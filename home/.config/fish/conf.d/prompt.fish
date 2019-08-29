@@ -12,6 +12,8 @@ function fish_prompt
   set STATUS $status
   set IS_REPOSITORY (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
+  tput cup $LINES 0
+
   echo -n '╦═══ '
 
   set_color brcyan; echo -n (whoami)
