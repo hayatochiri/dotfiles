@@ -8,3 +8,7 @@ else
 end
 
 set PATH $PATH $GOPATH/bin
+
+if [ (uname) = 'Darwin' ]
+  set PATH $PATH /Applications/VMware\ OVF\ Tool
+end
