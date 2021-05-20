@@ -1,0 +1,9 @@
+---
+
+# TODO: ghqがインストール済みか、最新版かをチェック
+
+- name: ghqをインストール
+  command: go get -u github.com/x-motemen/ghq
+  environment:
+    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+    GOPATH: "{{ ansible_env.HOME }}/.ghq"

@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  connection: local
+  roles:
+    - common
+    - git
+    - golang
+    - ghq
+    - fzf
+    - pyenv
+    - fish
+    - less

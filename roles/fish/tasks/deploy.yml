@@ -1,0 +1,24 @@
+---
+
+- name: fish-shell用ディレクトリを作成
+  file:
+    state: directory
+    path: '{{ item }}'
+    recurse: yes
+  with_items:
+    - '{{ ansible_env.HOME }}/.config'
+    - '{{ ansible_env.HOME }}/.config/fish'
+    - '{{ ansible_env.HOME }}/.config/fish/conf.d'
+
+- name: fish-shell設定ファイルを配置
+  copy:
+    src: 'files/{{ item }}'
+    dest: '{{ ansible_env.HOME }}/.config/fish/{{ item }}'
+  with_items:
+    - config.fish
+    - fish_variables
+
+- name: fish-shell設定ファイルを配置
+  copy:
+    src: files/conf.d/
+    dest: '{{ ansible_env.HOME }}/.config/fish/conf.d/'
