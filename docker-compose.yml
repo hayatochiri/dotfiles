@@ -1,5 +1,0 @@
-emulate:
-  build: .
-  volumes:
-    - ./home:/root
-  command: /usr/bin/fish

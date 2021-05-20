@@ -1,7 +1,0 @@
----
-
-sublime_text_3_git_repository: git@github.com:hayatochiri/sublime3-configs.git
-sublime_text_3_https_repository: https://github.com/hayatochiri/sublime3-configs.git
-sublime_text_3_clone_path: '~/.ghq/src/github.com/hayatochiri/sublime3-configs'
-sublime_text_3_deploy_revision: HEAD
-sublime_text_3_deploy_path: '~/Library/Application Support/Sublime Text 3'

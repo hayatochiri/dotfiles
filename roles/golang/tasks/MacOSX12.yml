@@ -1,0 +1,19 @@
+---
+
+- name: インストール済みgoバージョンを確認
+  command: go version
+  register: installed_go_version
+  ignore_errors: yes
+  changed_when: no
+
+# TODO: Apple Siliconに対応する
+- when: "(installed_go_version is failed) or (installed_go_version.stdout != 'go version go' + go_version + ' darwin/amd64')"
+  block:
+
+  - name: Goインストーラを取得
+    get_url:
+      url: https://go.dev/dl/go{{ go_version }}.darwin-amd64.pkg
+      dest: '{{ ansible_facts.user_dir }}/Downloads/go{{ go_version }}.darwin-amd64.pkg'
+
+  - name: Goインストーラを実行
+    command: 'open --wait-apps {{ ansible_facts.user_dir }}/Downloads/go{{ go_version }}.darwin-amd64.pkg'

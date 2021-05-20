@@ -1,0 +1,7 @@
+---
+
+- include: "tasks/{{ansible_distribution}}{{ansible_distribution_major_version}}.yml"
+
+# TODO: gitignore(~/.config/git/ignore)
+# TODO: diff-highlight
+# TODO: git-foresta

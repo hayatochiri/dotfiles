@@ -2,30 +2,9 @@
 
 chsh -s `which fish`
 
-mkdir -p ~/.config/fish/conf.d
-touch ~/.config/fish/config.fish
-
-ls -1 home/.config/fish/conf.d/ | while read -r f; do
-  rm -f ~/.config/fish/conf.d/_$f
-  ln -s "`pwd`/home/.config/fish/conf.d/$f" ~/.config/fish/conf.d/_$f
-done
-
 # git
 rm ~/.gitignore_global
 ln -s "`pwd`/home/.gitignore_global" ~/.gitignore_global
-
-# vim
-rm ~/.config/vim
-ln -s "`pwd`/home/.config/vim" ~/.config/vim
-rm ~/.vimrc
-ln -s "`pwd`/home/.config/vim/init.vim" ~/.vimrc
-rm -rf ~/.vim
-ln -s "`pwd`/home/.config/vim/filetype" ~/.vim
-
-# less
-rm ~/.less
-ln -s "`pwd`/home/.lesskey" ~/.lesskey
-lesskey
 
 # fisherman
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
@@ -33,28 +12,6 @@ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fishe
 # nvm
 fisher nvm
 
-# pyenv
-PYENV_VERSION=3.6.3
-git clone git://github.com/yyuu/pyenv.git ~/.pyenv
-pyenv install $PYENV_VERSION
-pyenv rehash
-pyenv global $PYENV_VERSION
-
-# chtc
-wget -O ~/.config/fish/conf.d/chtc.fish https://raw.githubusercontent.com/chrisshiplet/fish-title/master/chtc.fish
-
-# imgls, imgcat
-sudo wget -O /usr/local/bin/imgls https://raw.github.com/gnachman/iTerm2/master/tests/imgls
-sudo chmod +x /usr/local/bin/imgls
-sudo wget -O /usr/local/bin/imgcat https://raw.github.com/gnachman/iTerm2/master/tests/imgcat
-sudo chmod +x /usr/local/bin/imgcat
-
 # git-foresta
 sudo wget -O /usr/local/bin/git-foresta https://raw.githubusercontent.com/takaaki-kasai/git-foresta/master/git-foresta
 sudo chmod +x /usr/local/bin/git-foresta
-
-if [ "`uname`" = "Darwin" ]; then
-  rm ~/Library/LaunchAgents/org.golang.godoc.plist
-  ln -s "`pwd`/home/Library/LaunchAgents/org.golang.godoc.plist" ~/Library/LaunchAgents/org.golang.godoc.plist
-  launchctl load ~/Library/LaunchAgents/org.golang.godoc.plist
-fi

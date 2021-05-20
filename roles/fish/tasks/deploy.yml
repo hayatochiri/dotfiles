@@ -1,0 +1,69 @@
+---
+
+- name: fish-shell用ディレクトリを作成
+  file:
+    state: directory
+    path: '{{ item }}'
+    recurse: yes
+  with_items:
+    - '{{ ansible_facts.user_dir }}/.config'
+    - '{{ ansible_facts.user_dir }}/.config/fish'
+    - '{{ ansible_facts.user_dir }}/.config/fish/conf.d'
+    - '{{ ansible_facts.user_dir }}/.config/fish/functions'
+    - '{{ ansible_facts.user_dir }}/.config/fish/completions'
+
+- name: fish-shell設定ファイルを配置
+  file:
+    state: link
+    src: '{{ ansible_facts.env.PWD }}/roles/fish/files/{{ item }}'
+    path: '{{ ansible_facts.user_dir }}/.config/fish/{{ item }}'
+    force: yes
+  with_items:
+    - config.fish
+    - fish_variables
+
+- name: 展開するfish-shell設定ファイルのリストを取得
+  find:
+    file_type: file
+    paths: '{{ ansible_facts.env.PWD }}/roles/fish/files/conf.d'
+  register: fish_shell_configs_files
+
+- name: fish-shell詳細設定ファイルを配置
+  file:
+    state: link
+    src: '{{ item }}'
+    path: '{{ ansible_facts.user_dir }}/.config/fish/conf.d/{{ item | basename }}'
+    force: yes
+  with_items: '{{ fish_shell_configs_files.files | map(attribute="path") | list }}'
+
+- name: 展開するfish-shell関数ファイルのリストを取得
+  find:
+    file_type: file
+    paths: '{{ ansible_facts.env.PWD }}/roles/fish/files/functions'
+  register: fish_shell_functions_files
+
+- name: fish-shell関数ファイルを配置
+  file:
+    state: link
+    src: '{{ item }}'
+    path: '{{ ansible_facts.user_dir }}/.config/fish/functions/{{ item | basename }}'
+    force: yes
+  with_items: '{{ fish_shell_functions_files.files | map(attribute="path") | list }}'
+
+- name: 展開するfish-shell補完ファイルのリストを取得
+  find:
+    file_type: file
+    paths: '{{ ansible_facts.env.PWD }}/roles/fish/files/completions'
+  register: fish_shell_completions_files
+
+- name: fish-shell補完ファイルを配置
+  file:
+    state: link
+    src: '{{ item }}'
+    path: '{{ ansible_facts.user_dir }}/.config/fish/completions/{{ item | basename }}'
+    force: yes
+  with_items: '{{ fish_shell_completions_files.files | map(attribute="path") | list }}'
+
+# TODO: リンク切れの設定ファイルを削除する
+# TODO: fisher
+# TODO: nvm

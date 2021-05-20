@@ -1,0 +1,33 @@
+---
+
+- name: pyenvリポジトリを取得
+  git:
+    repo: git://github.com/pyenv/pyenv.git
+    dest: '{{ ansible_facts.user_dir }}/.pyenv'
+    force: yes
+    version: master
+
+- name: Pythonの適用するバージョンがインストールされているかを確認
+  stat:
+    path: "{{ ansible_facts.user_dir }}/.pyenv/versions/{{ pyenv_version }}"
+  register: installed_python
+
+- name: pyenvでグルーバルなPythonをインストール
+  when: not installed_python.stat.exists
+  shell: "pyenv install {{ pyenv_version }} && pyenv rehash"
+  environment:
+    PYENV_ROOT: "{{ ansible_facts.user_dir }}/.pyenv"
+    PATH: "{{ ansible_facts.user_dir }}/.pyenv/bin:{{ ansible_facts.env.PATH }}"
+
+- name: pyenvで適用されたPythonのバージョンを取得
+  command: "cat {{ ansible_facts.user_dir }}/.pyenv/version"
+  register: installed_python_version
+  ignore_errors: yes
+  changed_when: no
+
+- name: pyenvで使用するPythonを適用
+  when: "(installed_python_version is failed) or (installed_python_version.stdout != pyenv_version)"
+  shell: "pyenv global {{ pyenv_version }}"
+  environment:
+    PYENV_ROOT: "{{ ansible_facts.user_dir }}/.pyenv"
+    PATH: "{{ ansible_facts.user_dir }}/.pyenv/bin:{{ ansible_facts.env.PATH }}"

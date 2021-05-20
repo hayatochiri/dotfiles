@@ -1,6 +1,0 @@
----
-
-- hosts: os_Debian_9
-  gather_facts: no
-  roles:
-    - common

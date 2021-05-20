@@ -1,6 +1,0 @@
----
-
-dotfiles_git_repository: git@github.com:hayatochiri/dotfiles.git
-dotfiles_https_repository: https://github.com/hayatochiri/dotfiles.git
-dotfiles_clone_path: '~/.ghq/src/github.com/hayatochiri/dotfiles'
-dotfiles_deploy_revision: master

@@ -1,0 +1,28 @@
+---
+
+- name: fish-shellのリポジトリを追加
+  become: yes
+  apt_repository:
+    repo: "deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_10/ /"
+    filename: shells:fish:release:3.list
+    update_cache: no
+
+- name: fish-shellリポジトリのGPGキーを追加
+  become: yes
+  apt_key:
+    url: https://download.opensuse.org/repositories/shells:fish:release:3/Debian_10/Release.key
+    validate_certs: no
+
+- name: fish-shellをインストール
+  become: yes
+  apt:
+    name:
+      - fish
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: ユーザーシェルをfish-shellに変更
+  command: chsh -s /usr/local/bin/fish {{ ansible_facts.user_id }}
+  become: yes
+  when: ansible_facts.user_id != 'vagrant' and ansible_facts.user_shell != '/usr/local/bin/fish'

@@ -1,0 +1,15 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: yes
+  roles:
+    - common
+    - coreutils
+    - git
+    - golang
+    - ghq
+    - fzf
+    - pyenv
+    - fish
+    - less

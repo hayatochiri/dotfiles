@@ -1,0 +1,47 @@
+---
+
+- name: iCloud Driveへのリンクを作成
+  file:
+    state: link
+    path: '{{ ansible_facts.user_dir }}/iCloudDrive'
+    src: '{{ ansible_facts.user_dir }}/Library/Mobile Documents/com~apple~CloudDocs'
+
+- name: Homebrewをダウンロード
+  get_url:
+    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    dest: '{{ ansible_facts.user_dir }}/Downloads/homebrew-install.sh'
+    mode: '0755'
+
+- name: Homebrewインストールのため権限変更が必要なディレクトリを取得
+  find:
+    file_type: directory
+    paths: /usr/local
+  register: usr_local_directories
+
+- name: Homebrewインストールのためディレクトリの権限変更
+  become: yes
+  file:
+    path: '{{ item.path }}'
+    state: directory
+    recurse: yes
+    owner: '{{ ansible_facts.user_id }}'
+    group: admin
+  with_items: '{{ usr_local_directories.files }}'
+
+- name: Homebrewをインストール
+  shell: '{{ ansible_facts.user_dir }}/Downloads/homebrew-install.sh'
+
+- name: coreutilsをインストール
+  shell: brew install coreutils
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+
+- name: Homebrewインストール後のディレクトリ権限修正
+  become: yes
+  file:
+    path: '{{ item.path }}'
+    state: directory
+    recurse: yes
+    owner: root
+    group: admin
+  with_items: '{{ usr_local_directories.files }}'

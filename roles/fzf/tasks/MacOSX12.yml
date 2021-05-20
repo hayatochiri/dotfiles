@@ -1,0 +1,33 @@
+---
+
+- name: fzfリポジトリ配置ディレクトリを作成
+  become: yes
+  file:
+    state: directory
+    path: /usr/local/lib
+    recurse: yes
+    owner: root
+    group: admin
+
+- name: fzfリポジトリを取得
+  become: yes
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: /usr/local/lib/fzf
+    force: yes
+    version: master
+  register: clone_fzf
+
+- name: fzfをインストール
+  become: yes
+  shell: yes | ./install
+  args:
+    chdir: /usr/local/lib/fzf
+  when: clone_fzf is changed
+
+- name: fzfを実行パスへリンク
+  become: yes
+  file:
+    state: link
+    src: /usr/local/lib/fzf/bin/fzf
+    dest: /usr/local/bin/fzf

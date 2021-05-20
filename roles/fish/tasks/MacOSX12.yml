@@ -1,0 +1,9 @@
+---
+
+- name: インストーラを取得
+  get_url:
+    url: https://github.com/fish-shell/fish-shell/releases/download/3.3.1/fish-3.3.1.pkg
+    dest: '{{ ansible_facts.user_dir }}/Downloads/fish.pkg'
+
+- name: インストーラを実行
+  command: 'open --wait-apps {{ ansible_facts.user_dir }}/Downloads/fish.pkg'

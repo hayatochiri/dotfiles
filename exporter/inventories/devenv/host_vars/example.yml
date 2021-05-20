@@ -1,6 +1,0 @@
----
-
-ansible_become_pass: password
-ansible_ssh_user: ssh_user
-ssh_keygen_key_type: ed25519
-ssh_keygen_passphrase: passphrase

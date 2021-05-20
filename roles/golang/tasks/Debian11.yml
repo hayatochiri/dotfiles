@@ -1,0 +1,38 @@
+---
+
+- name: インストール済みgoバージョンを確認
+  command: /usr/local/go/bin/go version
+  register: installed_go_version
+  ignore_errors: yes
+  changed_when: no
+
+- name: Go言語パッケージをダウンロード
+  when: "(installed_go_version is failed) or (installed_go_version.stdout != 'go version go' + go_version + ' linux/amd64')"
+  become: yes
+  get_url:
+    url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: /usr/local
+  register: result
+
+- name: Go言語パッケージを展開
+  when: "(installed_go_version is failed) or (installed_go_version.stdout != 'go version go' + go_version + ' linux/amd64')"
+  become: yes
+  unarchive:
+    src: "{{ result.dest }}"
+    remote_src: yes
+    dest: "/usr/local"
+
+- name: ダウンロードしたGo言語パッケージを削除
+  when: "(installed_go_version is failed) or (installed_go_version.stdout != 'go version go' + go_version + ' linux/amd64')"
+  become: yes
+  file:
+    state: absent
+    path: "{{ result.dest }}"
+
+- name: Go言語関連のディレクトリを作成
+  file:
+    state: directory
+    path: "{{ item }}"
+    recurse: yes
+  with_items:
+    - "{{ ansible_facts.user_dir }}/.ghq"

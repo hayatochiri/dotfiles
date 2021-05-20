@@ -1,0 +1,87 @@
+---
+
+- name: debパッケージ版gitの削除
+  become: yes
+  apt:
+    name: git
+    state: absent
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: gitのビルドに必要なパッケージのインストール
+  become: yes
+  apt:
+    name:
+      - libcurl4-gnutls-dev
+      - libexpat1-dev
+      - gettext
+      - libz-dev
+      - libssl-dev
+      - asciidoc
+      - xmlto
+      - docbook2x
+      - autoconf
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: gitのインストール状態を確認
+  stat:
+    path: /usr/local/bin/git
+  register: git_existance
+
+- when: not git_existance.stat.exists
+  block:
+    - name: gitソースコードを取得、展開
+      unarchive:
+        src: https://github.com/git/git/archive/v2.34.0.tar.gz
+        dest: /tmp
+        remote_src: yes
+
+    - name: gitソースコードをビルド、インストール
+      become: yes
+      command: '{{ item }}'
+      args:
+        chdir: /tmp/git-2.34.0
+      with_items:
+        - 'make configure'
+        - './configure --prefix=/usr/local'
+        - 'make all doc info'
+        - 'make install install-doc install-html install-info'
+
+- name: gitリポジトリをclone
+  become: yes
+  git:
+    repo: git://git.kernel.org/pub/scm/git/git.git
+    dest: /usr/local/lib/git
+    version: master
+  register: git_clone
+
+- name: gitのアップデート
+  when: git_clone.changed
+  become: yes
+  command: '{{ item }}'
+  args:
+    chdir: /usr/local/lib/git
+  with_items:
+    - make all
+    - make prefix=/usr/local install
+
+- name: diff-highlightをビルド
+  become: yes
+  make:
+    chdir: /usr/local/lib/git/contrib/diff-highlight
+
+- name: diff-highlightをパスの通った場所に配置
+  become: yes
+  file:
+    state: link
+    path: /usr/local/bin/diff-highlight
+    src: /usr/local/lib/git/contrib/diff-highlight/diff-highlight
+
+- name: git-forestaを配置
+  become: yes
+  get_url:
+    url: https://raw.githubusercontent.com/takaaki-kasai/git-foresta/master/git-foresta
+    dest: /usr/local/bin/git-foresta
+    mode: 0777
